@@ -1,4 +1,5 @@
 import 'package:exam/features/auth/presentation/screens/login.dart';
+import 'package:exam/features/auth/presentation/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,16 +13,17 @@ class Exam extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, __) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-         routes: {
-          Login.routeName : (context) => const Login(),
-         },
-         initialRoute: Login.routeName,
-        ),
-      );
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, __) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          Login.routeName: (context) => const Login(),
+          RegisterScreen.routeName: (context) => const RegisterScreen(),
+        },
+        initialRoute: RegisterScreen.routeName,
+      ),
+    );
   }
 }
