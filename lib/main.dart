@@ -1,5 +1,9 @@
+import 'package:exam/core/resources/app_theme.dart';
+import 'package:exam/features/auth/presentation/screens/email_verification.dart';
+import 'package:exam/features/auth/presentation/screens/forget_password.dart';
 import 'package:exam/features/auth/presentation/screens/login.dart';
 import 'package:exam/features/auth/presentation/screens/register_screen.dart';
+import 'package:exam/features/auth/presentation/screens/reset_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,8 +25,12 @@ class Exam extends StatelessWidget {
         routes: {
           Login.routeName: (context) => const Login(),
           RegisterScreen.routeName: (context) => const RegisterScreen(),
+          ForgetPassword.routeName: (context) => ForgetPassword(),
+          EmailVerification.routeName: (context) => const EmailVerification(),
+          ResetPassword.routeName: (context) => const ResetPassword(),
         },
-        initialRoute: RegisterScreen.routeName,
+        initialRoute: Login.routeName,
+        theme: AppTheme.appThemeData,
       ),
     );
   }

@@ -45,8 +45,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
         title: const Text('Sign up'),
+        titleSpacing: 16.w,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -72,7 +72,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: 24.h),
                     Row(
-                      spacing: 12.w,
                       children: [
                         Expanded(
                           child: TextFormField(
@@ -90,6 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(width: 17.w),
                         Expanded(
                           child: TextFormField(
                             controller: _lastNameController,
@@ -124,7 +124,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: 24.h),
                     Row(
-                      spacing: 12.w,
                       children: [
                         Expanded(
                           child: TextFormField(
@@ -144,6 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             keyboardType: TextInputType.visiblePassword,
                           ),
                         ),
+                        SizedBox(width: 17.w),
                         Expanded(
                           child: TextFormField(
                             controller: _confirmPasswordController,
@@ -183,15 +183,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: 40.h),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(343.w, 48.h),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100.r),
-                        ),
-                        backgroundColor: AppTheme.blue,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 24.w, vertical: 10.h),
-                      ),
                       onPressed: _submitForm,
                       child: Text(
                         'Signup',
