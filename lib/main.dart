@@ -1,5 +1,8 @@
 import 'package:exam/features/auth/presentation/screens/login.dart';
 import 'package:exam/features/auth/presentation/screens/register_screen.dart';
+import 'package:exam/features/exam/explore/presentation/screens/languages.dart';
+import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
+import 'package:exam/features/exam/explore/presentation/screens/survay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,8 +24,11 @@ class Exam extends StatelessWidget {
         routes: {
           Login.routeName: (context) => const Login(),
           RegisterScreen.routeName: (context) => const RegisterScreen(),
+          LayOut.routeName: (context) => const LayOut(),
+          Survay.routeName: (context) => const Survay(),
+          Languages.routeName: (context) => const Languages(),
         },
-        initialRoute: RegisterScreen.routeName,
+        initialRoute: Languages.routeName,
       ),
     );
   }
