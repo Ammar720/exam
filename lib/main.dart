@@ -49,15 +49,12 @@ class Exam extends StatelessWidget {
           ForgetPassword.routeName: (context) => ForgetPassword(),
           EmailVerification.routeName: (context) => const EmailVerification(),
           ResetPassword.routeName: (context) => const ResetPassword(),
-        },
-        initialRoute: ProfileScreen.routeName,
-        initialRoute: Login.routeName,
-        theme: AppTheme.appThemeData,
           LayOut.routeName: (context) => const LayOut(),
           Survay.routeName: (context) => const Survay(),
           Languages.routeName: (context) => const Languages(),
         },
-        initialRoute: Languages.routeName,
+        initialRoute: Login.routeName,
+        theme: AppTheme.appThemeData,
       ),
     );
   }
