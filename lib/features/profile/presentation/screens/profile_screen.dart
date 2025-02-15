@@ -1,33 +1,60 @@
 import 'package:exam/core/resources/app_theme.dart';
 import 'package:exam/core/utils/validator.dart';
-import 'package:exam/features/auth/presentation/screens/login.dart';
+import 'package:exam/features/auth/data/models/user_model.dart';
+import 'package:exam/features/profile/presentation/screens/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class RegisterScreen extends StatefulWidget {
-  static const String routeName = '/register';
-  const RegisterScreen({super.key});
-
+class ProfileScreen extends StatefulWidget {
+  static const String routeName = '/profile';
+  const ProfileScreen({super.key, required this.user});
+  final UserModel user;
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _ProfileScreenState extends State<ProfileScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
+
+  bool _isButtonEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _userNameController.text = widget.user.username!;
+    _firstNameController.text = widget.user.firstName!;
+    _lastNameController.text = widget.user.lastName!;
+    _emailController.text = widget.user.email!;
+    _phoneNumberController.text = widget.user.phone!;
+
+    _userNameController.addListener(_checkIfEdited);
+    _firstNameController.addListener(_checkIfEdited);
+    _lastNameController.addListener(_checkIfEdited);
+    _emailController.addListener(_checkIfEdited);
+    _phoneNumberController.addListener(_checkIfEdited);
+  }
+
+  void _checkIfEdited() {
+    setState(() {
+      _isButtonEnabled = _userNameController.text != widget.user.username ||
+          _firstNameController.text != widget.user.firstName ||
+          _lastNameController.text != widget.user.lastName ||
+          _emailController.text != widget.user.email ||
+          _phoneNumberController.text != widget.user.phone;
+    });
+  }
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Done')),
+        const SnackBar(content: Text('Profile Updated Successfully!')),
       );
     }
   }
@@ -45,14 +72,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign up'),
-        titleSpacing: 16.w,
+        centerTitle: false,
+        title: const Text('Profile'),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(81.r)),
+                    child: Image.network(
+                      'https://media.istockphoto.com/id/1388253782/photo/positive-successful-millennial-business-professional-man-head-shot-portrait.jpg?b=1&s=612x612&w=0&k=20&c=VsTsa0kjyZ7ALe-nyKAUfynyRxZo8H4LRMdu_ecPuOY=',
+                      width: 81.w,
+                      height: 81.h,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      width: 24.w,
+                      height: 24.h,
+                      decoration: BoxDecoration(
+                          color: AppTheme.liteBlue,
+                          borderRadius: BorderRadius.all(Radius.circular(6.r))),
+                      child: Icon(
+                        Icons.photo_camera_outlined,
+                        color: AppTheme.white,
+                        size: 16.sp,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 24.h),
               Form(
                 key: _formKey,
                 child: Column(
@@ -60,6 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     TextFormField(
                       controller: _userNameController,
                       validator: Validator.validateUsername,
+                      // initialValue: _userNameController.text,
                       decoration: InputDecoration(
                         labelText: 'User name',
                         labelStyle: labelTextStyle,
@@ -72,6 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: 24.h),
                     Row(
+                      spacing: 12.w,
                       children: [
                         Expanded(
                           child: TextFormField(
@@ -89,7 +149,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 17.w),
                         Expanded(
                           child: TextFormField(
                             controller: _lastNameController,
@@ -123,48 +182,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     SizedBox(height: 24.h),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _passwordController,
-                            validator: Validator.validatePassword,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: labelTextStyle,
-                              border: const OutlineInputBorder(),
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: 'Enter password',
-                              hintStyle: hintTextStyle,
-                              contentPadding: EdgeInsets.all(16.sp),
+                    TextFormField(
+                      validator: Validator.validatePassword,
+                      initialValue: 'Password',
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'Password',
+                        labelStyle: labelTextStyle,
+                        border: const OutlineInputBorder(),
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                        hintText: 'Enter password',
+                        hintStyle: hintTextStyle,
+                        suffix: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, ResetPasswordScreen.routeName);
+                          },
+                          child: Text(
+                            'Change',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: AppTheme.blue,
                             ),
-                            keyboardType: TextInputType.visiblePassword,
                           ),
                         ),
-                        SizedBox(width: 17.w),
-                        Expanded(
-                          child: TextFormField(
-                            controller: _confirmPasswordController,
-                            validator: (val) =>
-                                Validator.validateConfirmPassword(
-                                    val, _passwordController.text),
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: 'Confirm password',
-                              labelStyle: labelTextStyle,
-                              border: const OutlineInputBorder(),
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              hintText: 'Confirm password',
-                              hintStyle: hintTextStyle,
-                              contentPadding: EdgeInsets.all(16.sp),
-                            ),
-                            keyboardType: TextInputType.visiblePassword,
-                          ),
-                        ),
-                      ],
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      obscuringCharacter: '★',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: AppTheme.lightGray,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     SizedBox(height: 24.h),
                     TextFormField(
@@ -183,39 +234,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: 40.h),
                     ElevatedButton(
-                      onPressed: _submitForm,
+                      style: ElevatedButton.styleFrom(
+                        disabledBackgroundColor: AppTheme.lightGray,
+                        backgroundColor: AppTheme.blue,
+                        fixedSize: Size(343.w, 48.h),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.r),
+                        ),
+                        // backgroundColor:
+                        //     _isButtonEnabled ? AppTheme.gray : AppTheme.blue,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 24.w, vertical: 10.h),
+                      ),
+                      onPressed: _isButtonEnabled ? _submitForm : null,
                       child: Text(
-                        'Signup',
+                        'Update',
                         style: TextStyle(
-                            color: AppTheme.white,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500),
+                          color: AppTheme.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 12.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Already have an account? ',
-                    style: TextStyle(fontSize: 16.sp),
-                  ),
-                  GestureDetector(
-                      onTap: () => Navigator.pushReplacementNamed(
-                          context, Login.routeName),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                            color: AppTheme.blue,
-                            decoration: TextDecoration.underline,
-                            fontSize: 16.sp),
-                      ))
-                ],
-              ),
-              SizedBox(height: 12.h),
             ],
           ),
         ),
