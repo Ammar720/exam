@@ -131,7 +131,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     SizedBox(height: 24.h),
                     Row(
-                      spacing: 12.w,
                       children: [
                         Expanded(
                           child: TextFormField(
@@ -149,6 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(width: 17.w),
                         Expanded(
                           child: TextFormField(
                             controller: _lastNameController,

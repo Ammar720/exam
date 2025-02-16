@@ -52,15 +52,9 @@ class ForgetPassword extends StatelessWidget {
                     controller: _emailController,
                     validator: Validator.validateEmail,
                     cursorColor: AppTheme.black,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email',
-                      labelStyle: Theme.of(context).textTheme.bodySmall,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText: 'Enter your email',
-                      hintStyle: Theme.of(context).textTheme.bodyLarge,
-                      contentPadding: EdgeInsets.all(16.sp),
                     ),
                   ),
                 ),

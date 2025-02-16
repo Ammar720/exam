@@ -37,10 +37,16 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_screenutil: ^5.9.3
   pinput: ^5.0.1
+  dio: ^5.7.0
+  injectable: ^2.5.0
+  get_it: ^8.0.3
+  flutter_bloc: ^9.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  injectable_generator: ^2.6.2
+  build_runner: ^2.4.13 
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
