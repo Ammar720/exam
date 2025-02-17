@@ -1,6 +1,6 @@
 import 'package:exam/core/resources/app_theme.dart';
 import 'package:exam/core/utils/validator.dart';
-import 'package:exam/features/auth/presentation/screens/login.dart';
+import 'package:exam/features/auth/login/presentation/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

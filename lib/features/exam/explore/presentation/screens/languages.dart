@@ -11,29 +11,27 @@ class Languages extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Languge"),
+          title: const Text("Languge"),
           centerTitle: false,
-          leading: Icon(Icons.arrow_back_ios_new),
+          leading: const Icon(Icons.arrow_back_ios_new),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Text("English"),
+              const Text("English"),
               Container(
                 color: AppTheme.placeHolder,
                 height: 150.sp,
                 width: 400.sp,
-                child: Row(
+                child: const Row(
                   children: [
-                    Container(
-                      child: Icon(
-                        Icons.ac_unit_rounded,
-                        size: 100,
-                      ),
+                    Icon(
+                      Icons.ac_unit_rounded,
+                      size: 100,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,13 +1,13 @@
-import 'package:exam/features/auth/data/models/user_model.dart';
+import 'package:exam/features/auth/register/data/models/user_model.dart';
 import 'package:exam/core/resources/app_theme.dart';
-import 'package:exam/features/auth/presentation/screens/email_verification.dart';
-import 'package:exam/features/auth/presentation/screens/forget_password.dart';
-import 'package:exam/features/auth/presentation/screens/login.dart';
-import 'package:exam/features/auth/presentation/screens/register_screen.dart';
+import 'package:exam/features/auth/forgetPassword/presentation/screens/email_verification.dart';
+import 'package:exam/features/auth/forgetPassword/presentation/screens/forget_password.dart';
+import 'package:exam/features/auth/login/presentation/screens/login.dart';
+import 'package:exam/features/auth/register/presentation/screens/register_screen.dart';
 import 'package:exam/features/profile/presentation/screens/profile_screen.dart';
 import 'package:exam/features/profile/presentation/screens/reset_password_screen.dart';
 
-import 'package:exam/features/auth/presentation/screens/reset_password.dart';
+import 'package:exam/features/auth/forgetPassword/presentation/screens/reset_password.dart';
 import 'package:exam/features/exam/explore/presentation/screens/languages.dart';
 import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
 import 'package:exam/features/exam/explore/presentation/screens/survay.dart';

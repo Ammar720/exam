@@ -1,7 +1,7 @@
 import 'package:exam/core/resources/app_theme.dart';
 import 'package:exam/core/utils/validator.dart';
-import 'package:exam/features/auth/presentation/screens/forget_password.dart';
-import 'package:exam/features/auth/presentation/screens/register_screen.dart';
+import 'package:exam/features/auth/forgetPassword/presentation/screens/forget_password.dart';
+import 'package:exam/features/auth/register/presentation/screens/register_screen.dart';
 import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,10 +24,10 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: const Text("Login"),
         titleSpacing: 16.w,
         centerTitle: false,
-        leading: Icon(Icons.arrow_back_ios),
+        leading: const Icon(Icons.arrow_back_ios),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 24, left: 16, right: 16),
@@ -46,10 +46,10 @@ class _LoginState extends State<Login> {
                         labelText: "Email",
                         labelStyle: AppTheme.appThemeData.textTheme.bodySmall
                             ?.copyWith(color: AppTheme.black),
-                        focusedBorder: OutlineInputBorder(),
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(),
-                        errorBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: const OutlineInputBorder(),
+                        errorBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.red)),
                         hintText: "Enter your email"),
                   ),
@@ -67,10 +67,10 @@ class _LoginState extends State<Login> {
                         labelText: "Password",
                         labelStyle: AppTheme.appThemeData.textTheme.bodySmall
                             ?.copyWith(color: AppTheme.black),
-                        focusedBorder: OutlineInputBorder(),
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(),
-                        errorBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: const OutlineInputBorder(),
+                        errorBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.red)),
                         hintText: "Enter your Password"),
                   ),
@@ -81,14 +81,14 @@ class _LoginState extends State<Login> {
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: [
-                  InkWell(onTap: () {}, child: Icon(Icons.square_outlined)),
-                  Text("Remmember me"),
-                  Spacer(),
+                  InkWell(onTap: () {}, child: const Icon(Icons.square_outlined)),
+                  const Text("Remmember me"),
+                  const Spacer(),
                   InkWell(
                     onTap: () {
                       Navigator.pushNamed(context, ForgetPassword.routeName);
                     },
-                    child: Text(
+                    child: const Text(
                       "Forget password?",
                       style: TextStyle(decoration: TextDecoration.underline),
                     ),
@@ -102,18 +102,17 @@ class _LoginState extends State<Login> {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                      child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamed(context, LayOut.routeName);
-                            }
-                          },
-                          child: Text(
-                            "Login",
-                            style: AppTheme.appThemeData.textTheme.titleMedium
-                                ?.copyWith(color: AppTheme.white),
-                          ))),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.pushNamed(context, LayOut.routeName);
+                        }
+                      },
+                      child: Text(
+                        "Login",
+                        style: AppTheme.appThemeData.textTheme.titleMedium
+                            ?.copyWith(color: AppTheme.white),
+                      )),
                 ),
               ],
             ),
@@ -121,13 +120,13 @@ class _LoginState extends State<Login> {
               height: 16.sp,
             ),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text("Don't have an account?"),
+              const Text("Don't have an account?"),
               InkWell(
                   onTap: () {
                     Navigator.pushReplacementNamed(
                         context, RegisterScreen.routeName);
                   },
-                  child: Text(
+                  child: const Text(
                     "Sign Up",
                     style: TextStyle(
                         color: AppTheme.blue,

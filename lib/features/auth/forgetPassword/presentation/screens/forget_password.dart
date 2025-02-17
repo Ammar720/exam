@@ -1,5 +1,5 @@
 import 'package:exam/core/utils/validator.dart';
-import 'package:exam/features/auth/presentation/screens/email_verification.dart';
+import 'package:exam/features/auth/forgetPassword/presentation/screens/email_verification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:exam/core/resources/app_theme.dart';

@@ -10,7 +10,7 @@ class Survay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Survey",
           style: TextStyle(color: AppTheme.blue),
         ),
@@ -22,7 +22,7 @@ class Survay extends StatelessWidget {
           children: [
             TextField(
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 hintText: "Search",
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.sp)),
@@ -33,7 +33,7 @@ class Survay extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.centerLeft,
-              child: Text(
+              child: const Text(
                 "Browse by subject",
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
               ),
@@ -49,7 +49,7 @@ class Survay extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: AppTheme.lightBlue,
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(Icons.abc),
                   Text("Languge"),
