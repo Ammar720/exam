@@ -1,5 +1,5 @@
 import 'package:exam/core/resources/app_theme.dart';
-import 'package:exam/features/auth/presentation/screens/reset_password.dart';
+import 'package:exam/features/auth/forgetPassword/presentation/screens/reset_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';

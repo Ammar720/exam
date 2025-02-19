@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
-  static const Color blue = Color(0xff02369C);
+ static const Color blue = Color(0xff02369C);
   static const Color liteBlue = Color(0xff5679BD);
   static const Color white = Color(0xffF9F9F9);
   static const Color black = Color(0xff0F0F0F);
@@ -15,37 +15,37 @@ class AppTheme {
   static const Color placeHolder = Color(0xffA6A6A6);
   static const Color verifyCode = Color(0xffdfe7f7);
 
+
+  static final TextTheme textTheme = TextTheme(
+    titleLarge: TextStyle(
+      color: black,
+      fontWeight: FontWeight.w500,
+      fontSize: 18.sp,
+    ),
+    titleMedium: TextStyle(
+      color: black,
+      fontWeight: FontWeight.w400,
+      fontSize: 16.sp,
+    ),
+    bodyLarge: TextStyle(
+      color: placeHolder,
+      fontWeight: FontWeight.w400,
+      fontSize: 14.sp,
+    ),
+    bodySmall: TextStyle(
+      color: gray,
+      fontWeight: FontWeight.w400,
+      fontSize: 12.sp,
+    ),
+  );
+
   static ThemeData appThemeData = ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    textTheme: TextTheme(
-        titleLarge: TextStyle(
-          color: black,
-          fontWeight: FontWeight.w500,
-          fontSize: 18.sp,
-        ),
-        titleMedium: TextStyle(
-          color: black,
-          fontWeight: FontWeight.w400,
-          fontSize: 16.sp,
-        ),
-        bodyLarge: TextStyle(
-          color: placeHolder,
-          fontWeight: FontWeight.w400,
-          fontSize: 14.sp,
-        ),
-        bodySmall: TextStyle(
-          color: gray,
-          fontWeight: FontWeight.w400,
-          fontSize: 12.sp,
-        )),
+    textTheme: textTheme,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
       titleSpacing: 0,
-      titleTextStyle: TextStyle(
-        color: black,
-        fontWeight: FontWeight.w500,
-        fontSize: 20.sp,
-      ),
+      titleTextStyle: textTheme.titleLarge,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -67,6 +67,15 @@ class AppTheme {
           ),
         ),
       ),
+    ),
+    
+    inputDecorationTheme: InputDecorationTheme(
+      labelStyle: textTheme.bodyLarge,
+      hintStyle: textTheme.bodyLarge,
+      border: const OutlineInputBorder(),
+      focusedBorder: const OutlineInputBorder(),
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      contentPadding: EdgeInsets.all(16.sp),
     ),
   );
 }

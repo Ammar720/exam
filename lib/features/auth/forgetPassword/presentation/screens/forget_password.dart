@@ -1,5 +1,5 @@
 import 'package:exam/core/utils/validator.dart';
-import 'package:exam/features/auth/presentation/screens/email_verification.dart';
+import 'package:exam/features/auth/forgetPassword/presentation/screens/email_verification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:exam/core/resources/app_theme.dart';
@@ -52,15 +52,9 @@ class ForgetPassword extends StatelessWidget {
                     controller: _emailController,
                     validator: Validator.validateEmail,
                     cursorColor: AppTheme.black,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email',
-                      labelStyle: Theme.of(context).textTheme.bodySmall,
-                      border: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText: 'Enter your email',
-                      hintStyle: Theme.of(context).textTheme.bodyLarge,
-                      contentPadding: EdgeInsets.all(16.sp),
                     ),
                   ),
                 ),

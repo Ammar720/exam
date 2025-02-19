@@ -60,15 +60,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                           obscureText: true,
                           style: Theme.of(context).textTheme.titleMedium,
                           cursorColor: AppTheme.black,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Password',
-                            labelStyle: Theme.of(context).textTheme.bodySmall,
-                            border: const OutlineInputBorder(),
-                            focusedBorder: const OutlineInputBorder(),
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
                             hintText: 'Enter password',
-                            hintStyle: Theme.of(context).textTheme.bodyLarge,
-                            contentPadding: EdgeInsets.all(16.sp),
                           ),
                           keyboardType: TextInputType.visiblePassword,
                         ),
