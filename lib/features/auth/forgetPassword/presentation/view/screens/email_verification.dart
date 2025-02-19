@@ -1,5 +1,5 @@
 import 'package:exam/core/resources/app_theme.dart';
-import 'package:exam/features/auth/forgetPassword/presentation/screens/reset_password.dart';
+import 'package:exam/features/auth/forgetPassword/presentation/view/screens/reset_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
@@ -91,9 +91,7 @@ class EmailVerification extends StatelessWidget {
                   color: AppTheme.white,
                   borderRadius: BorderRadius.circular(10.r),
                   border: Border.all(color: AppTheme.error, width: 1),
-            
                 ),
-               
               ),
               onCompleted: (pin) {
                 if (pin == correctCode) {
