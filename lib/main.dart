@@ -1,3 +1,4 @@
+import 'package:exam/core/di/di.dart';
 import 'package:exam/features/auth/register/data/models/user_model.dart';
 import 'package:exam/core/resources/app_theme.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/screens/email_verification.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
+  configureDependencies(); 
   runApp(const Exam());
 }
 

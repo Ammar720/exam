@@ -91,9 +91,7 @@ class EmailVerification extends StatelessWidget {
                   color: AppTheme.white,
                   borderRadius: BorderRadius.circular(10.r),
                   border: Border.all(color: AppTheme.error, width: 1),
-            
                 ),
-               
               ),
               onCompleted: (pin) {
                 if (pin == correctCode) {

@@ -81,7 +81,8 @@ class _LoginState extends State<Login> {
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: [
-                  InkWell(onTap: () {}, child: const Icon(Icons.square_outlined)),
+                  InkWell(
+                      onTap: () {}, child: const Icon(Icons.square_outlined)),
                   const Text("Remmember me"),
                   const Spacer(),
                   InkWell(

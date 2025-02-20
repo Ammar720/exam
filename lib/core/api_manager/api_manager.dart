@@ -4,9 +4,7 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class ApiManager {
-  final Dio dio = Dio(
-    BaseOptions(
-      baseUrl: ApiConstants.baseUrl,
-    )
-  );
+  final Dio dio = Dio(BaseOptions(
+    baseUrl: ApiConstants.baseUrl,
+  ));
 }
