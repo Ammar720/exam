@@ -12,6 +12,6 @@ class ApiConstants {
   static const String resetPasswordEndpoint = "auth/resetPassword";
 }
 
-class SharedPrfConstants {
+class StorageConstants {
   static const String tokenKey = "token";
 }

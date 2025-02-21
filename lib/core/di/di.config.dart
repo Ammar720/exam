@@ -11,8 +11,8 @@
 import 'package:exam/core/api_manager/api_manager.dart' as _i402;
 import 'package:exam/features/auth/register/data/data_source/local/register_local_data_source.dart'
     as _i608;
-import 'package:exam/features/auth/register/data/data_source/local/register_shared_prf_data_source.dart'
-    as _i1005;
+import 'package:exam/features/auth/register/data/data_source/local/register_secure_storage_data_source.dart'
+    as _i78;
 import 'package:exam/features/auth/register/data/data_source/remote/register_api_data_source.dart'
     as _i40;
 import 'package:exam/features/auth/register/data/data_source/remote/register_remote_data_source.dart'
@@ -39,7 +39,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i402.ApiManager>(() => _i402.ApiManager());
     gh.factory<_i608.RegisterLocalDataSource>(
-        () => _i1005.RegisterSharedPrfDataSource());
+        () => _i78.RegisterSecureStorageDataSource());
     gh.factory<_i1058.RegisterRemoteDataSource>(
         () => _i40.RegisterApiDataSource(gh<_i402.ApiManager>()));
     gh.factory<_i676.RegisterRepo>(() => _i849.RegisterRepoImpl(
