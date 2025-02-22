@@ -9,7 +9,12 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
   ForgetPasswordRepoImpl(this._remoteDataSources);
 
   @override
-  Future<ApiResult<void>> forgetPassword(String email) {
-    return _remoteDataSources.forgetPassword(email);
+  Future<ApiResult<void>> enterEmail(String email) {
+    return _remoteDataSources.enterEmail(email);
+  }
+  
+  @override
+  Future<ApiResult<void>> verfiyResetCode(String resetCode) {
+   return _remoteDataSources.verfiyResetCode(resetCode);
   }
 }

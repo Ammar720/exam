@@ -17,8 +17,10 @@ import 'package:exam/features/auth/forgetPassword/data/repositories/forget_passw
     as _i897;
 import 'package:exam/features/auth/forgetPassword/domain/repositories/forget_password_repo.dart'
     as _i271;
-import 'package:exam/features/auth/forgetPassword/domain/usecases/forget_password.dart'
-    as _i24;
+import 'package:exam/features/auth/forgetPassword/domain/usecases/enter_email.dart'
+    as _i203;
+import 'package:exam/features/auth/forgetPassword/domain/usecases/verfiy_reset_code.dart'
+    as _i126;
 import 'package:exam/features/auth/forgetPassword/presentation/viewModel/cubits/forget_password_cubit.dart'
     as _i326;
 import 'package:get_it/get_it.dart' as _i174;
@@ -36,14 +38,18 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.singleton<_i402.ApiManager>(() => _i402.ApiManager());
-    gh.singleton<_i892.RemoteDataSources>(
+    gh.factory<_i892.RemoteDataSources>(
         () => _i735.ApiRemoteDataSource(gh<_i402.ApiManager>()));
-    gh.singleton<_i271.ForgetPasswordRepo>(
+    gh.factory<_i271.ForgetPasswordRepo>(
         () => _i897.ForgetPasswordRepoImpl(gh<_i892.RemoteDataSources>()));
-    gh.singleton<_i24.ForgetPassword>(
-        () => _i24.ForgetPassword(gh<_i271.ForgetPasswordRepo>()));
-    gh.singleton<_i326.ForgetPasswordCubit>(
-        () => _i326.ForgetPasswordCubit(gh<_i24.ForgetPassword>()));
+    gh.factory<_i203.EnterEmail>(
+        () => _i203.EnterEmail(gh<_i271.ForgetPasswordRepo>()));
+    gh.singleton<_i126.VerfiyResetCode>(
+        () => _i126.VerfiyResetCode(gh<_i271.ForgetPasswordRepo>()));
+    gh.factory<_i326.ForgetPasswordCubit>(() => _i326.ForgetPasswordCubit(
+          gh<_i203.EnterEmail>(),
+          gh<_i126.VerfiyResetCode>(),
+        ));
     return this;
   }
 }

@@ -82,7 +82,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         }
                         if (state is ForgetPasswordSuccess) {
                           Navigator.pushNamed(
-                              context, EmailVerification.routeName);
+                              context, EmailVerification.routeName,
+                              arguments: _emailController.text);
                         } else if (state is ForgetPasswordError) {
                           UIUtils.showMessage(state.message);
                         }
@@ -90,7 +91,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            _cubit.forgetPassword(_emailController.text);
+                            _cubit.enterEmail(_emailController.text);
                           }
                         },
                         child: const Text('Continue'),

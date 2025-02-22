@@ -3,9 +3,8 @@ import 'package:exam/features/auth/forgetPassword/domain/repositories/forget_pas
 import 'package:injectable/injectable.dart';
 
 @singleton
-class ForgetPassword {
+class VerfiyResetCode {
   final ForgetPasswordRepo _repo;
-  ForgetPassword(this._repo);
-
-  Future<ApiResult<void>> call(String email) => _repo.forgetPassword(email);
+  VerfiyResetCode(this._repo);
+  Future<ApiResult<void>> call(String resetCode) => _repo.verfiyResetCode(resetCode);
 }
