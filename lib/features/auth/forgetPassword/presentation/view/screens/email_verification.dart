@@ -60,18 +60,16 @@ class _EmailVerificationState extends State<EmailVerification> {
               SizedBox(height: 32.h),
               BlocListener<ForgetPasswordCubit, ForgetPasswordStates>(
                 listener: (context, state) {
-                  print("Current State: $state"); // Debugging
-
                   if (state is ForgetPasswordLoading) {
                     UIUtils.showLoading(context);
                   } else {
                     UIUtils.hideLoading(context);
                   }
-
                   if (state is ForgetPasswordSuccess) {
                     Navigator.pushNamed(
                       context,
                       ResetPassword.routeName,
+                      arguments: email,
                     );
                   } else if (state is ResendOTPSuccess) {
                     UIUtils.showMessage('OTP resent to your email');

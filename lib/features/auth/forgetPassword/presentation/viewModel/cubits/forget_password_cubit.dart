@@ -1,3 +1,4 @@
+import 'package:exam/features/auth/forgetPassword/domain/usecases/reset_password.dart';
 import 'package:exam/core/api_manager/api_results.dart';
 import 'package:exam/features/auth/forgetPassword/domain/usecases/enter_email.dart';
 import 'package:exam/features/auth/forgetPassword/domain/usecases/verfiy_reset_code.dart';
@@ -9,9 +10,12 @@ import 'package:injectable/injectable.dart';
 class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
   final EnterEmail _enterEmail;
   final VerfiyResetCode _verfiyResetCode;
+  final ResetPassword _resetPassword;
+
   ForgetPasswordCubit(
     this._enterEmail,
     this._verfiyResetCode,
+    this._resetPassword,
   ) : super(ForgetPasswordInitial());
 
   Future<void> enterEmail(String email, {bool isResend = false}) async {
@@ -31,6 +35,16 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
   Future<void> verfiyResetCode(String resetCode) async {
     emit(ForgetPasswordLoading());
     final result = await _verfiyResetCode(resetCode);
+    if (result is SuccessApiResult) {
+      emit(ForgetPasswordSuccess());
+    } else if (result is ErrorApiResult) {
+      emit(ForgetPasswordError(result.exception.toString()));
+    }
+  }
+
+  Future<void> resetPassword(String email, String password) async {
+    emit(ForgetPasswordLoading());
+    final result = await _resetPassword(email, password);
     if (result is SuccessApiResult) {
       emit(ForgetPasswordSuccess());
     } else if (result is ErrorApiResult) {

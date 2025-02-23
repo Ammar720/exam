@@ -1,4 +1,5 @@
 import 'package:exam/core/di/di.dart';
+import 'package:exam/features/auth/core/presentation/cubit/token_cubit.dart';
 import 'package:exam/features/auth/register/data/models/user_model.dart';
 import 'package:exam/core/resources/app_theme.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/email_verification.dart';
@@ -13,11 +14,22 @@ import 'package:exam/features/exam/explore/presentation/screens/languages.dart';
 import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
 import 'package:exam/features/exam/explore/presentation/screens/survay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  runApp(const Exam());
+
+  final tokenCubit = getIt<TokenCubit>();
+  await tokenCubit.loadToken();
+
+  runApp(
+    BlocProvider<TokenCubit>.value(
+      value: tokenCubit,
+      child: const Exam(),
+    ),
+  );
 }
 
 class Exam extends StatelessWidget {
@@ -40,23 +52,28 @@ class Exam extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_, __) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: {
-          Login.routeName: (context) => const Login(),
-          RegisterScreen.routeName: (context) => const RegisterScreen(),
-          ProfileScreen.routeName: (context) => ProfileScreen(user: user),
-          ResetPasswordScreen.routeName: (context) =>
-              const ResetPasswordScreen(),
-          ForgetPassword.routeName: (context) => ForgetPassword(),
-          EmailVerification.routeName: (context) => const EmailVerification(),
-          ResetPassword.routeName: (context) => const ResetPassword(),
-          LayOut.routeName: (context) => const LayOut(),
-          Survay.routeName: (context) => const Survay(),
-          Languages.routeName: (context) => const Languages(),
+      builder: (_, __) => BlocBuilder<TokenCubit, String?>(
+        builder: (context, token) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            routes: {
+              Login.routeName: (context) => const Login(),
+              RegisterScreen.routeName: (context) => const RegisterScreen(),
+              ProfileScreen.routeName: (context) => ProfileScreen(user: user),
+              ResetPasswordScreen.routeName: (context) =>
+                  const ResetPasswordScreen(),
+              ForgetPassword.routeName: (context) => ForgetPassword(),
+              EmailVerification.routeName: (context) =>
+                  const EmailVerification(),
+              ResetPassword.routeName: (context) => const ResetPassword(),
+              LayOut.routeName: (context) => const LayOut(),
+              Survay.routeName: (context) => const Survay(),
+              Languages.routeName: (context) => const Languages(),
+            },
+            initialRoute: token != null ? LayOut.routeName : Login.routeName,
+            theme: AppTheme.appThemeData,
+          );
         },
-        initialRoute: Login.routeName,
-        theme: AppTheme.appThemeData,
       ),
     );
   }

@@ -6,7 +6,7 @@ class SuccessApiResult<T> extends ApiResult<T> {
 }
 
 class ErrorApiResult<T> extends ApiResult<T> {
-  Exception exception;
+  String exception;
   ErrorApiResult(this.exception);
 }
 
