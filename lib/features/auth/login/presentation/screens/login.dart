@@ -1,6 +1,6 @@
 import 'package:exam/core/resources/app_theme.dart';
 import 'package:exam/core/utils/validator.dart';
-import 'package:exam/features/auth/forgetPassword/presentation/screens/forget_password.dart';
+import 'package:exam/features/auth/forgetPassword/presentation/view/screens/forget_password.dart';
 import 'package:exam/features/auth/register/presentation/screens/register_screen.dart';
 import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
 import 'package:flutter/material.dart';
