@@ -22,13 +22,20 @@ class RegisterRepoImpl implements RegisterRepo {
     RegisterRequestDto userDto = RegisterRequestDto.fromEntity(userData);
     try {
       var response = await _registerRemoteDataSource.register(userDto);
-      _registerLocalDataSource.saveToken(response.token!);
-      return SuccessApiResult(response.toEntity());
-    } on DioException catch (dioError) {
-      return ErrorApiResult(Exception(
-          dioError.response?.data['message'] ?? 'Something went wrong'));
+
+      if (response.message == 'success') {
+        _registerLocalDataSource.saveToken(response.token!);
+        return SuccessApiResult(response.toEntity());
+      } else {
+        String errorMessage = response.message ?? 'Unexpected error';
+        return ErrorApiResult(Exception(errorMessage));
+      }
+    } on DioException catch (e) {
+      String errorMessage =
+          e.response?.data['message'] ?? 'Something went wrong';
+      return ErrorApiResult(Exception(errorMessage));
     } catch (ex) {
-      return ErrorApiResult(Exception('Something went wrong'));
+      return ErrorApiResult(Exception(ex));
     }
   }
 }

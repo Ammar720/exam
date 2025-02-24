@@ -1,3 +1,4 @@
+import 'package:exam/core/app_bloc_observer.dart';
 import 'package:exam/core/di/di.dart';
 import 'package:exam/features/auth/register/data/models/user_model.dart';
 import 'package:exam/core/resources/app_theme.dart';
@@ -13,10 +14,13 @@ import 'package:exam/features/exam/explore/presentation/screens/languages.dart';
 import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
 import 'package:exam/features/exam/explore/presentation/screens/survay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  configureDependencies(); 
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = AppBlocObserver();
+  configureDependencies();
   runApp(const Exam());
 }
 

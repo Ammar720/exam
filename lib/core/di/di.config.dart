@@ -21,8 +21,10 @@ import 'package:exam/features/auth/register/data/repositories/register_repo_impl
     as _i849;
 import 'package:exam/features/auth/register/domain/contract/register_repo.dart'
     as _i676;
-import 'package:exam/features/auth/register/domain/usecases/register_usecase.dart'
-    as _i50;
+import 'package:exam/features/auth/register/domain/usecase/register_usecase.dart'
+    as _i536;
+import 'package:exam/features/auth/register/presentation/cubit/register_view_model.dart'
+    as _i49;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -46,8 +48,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i1058.RegisterRemoteDataSource>(),
           gh<_i608.RegisterLocalDataSource>(),
         ));
-    gh.factory<_i50.RegisterUseCase>(
-        () => _i50.RegisterUseCase(gh<_i676.RegisterRepo>()));
+    gh.factory<_i536.RegisterUseCase>(
+        () => _i536.RegisterUseCase(gh<_i676.RegisterRepo>()));
+    gh.factory<_i49.RegisterViewModel>(
+        () => _i49.RegisterViewModel(gh<_i536.RegisterUseCase>()));
     return this;
   }
 }
