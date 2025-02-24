@@ -15,7 +15,11 @@ class LayOut extends StatefulWidget {
 class _SurveyState extends State<LayOut> {
   int selectedindex = 0;
 
-  List<Widget> screens = [const Survay(), const RegisterScreen(), const Login()];
+  List<Widget> screens = [
+    const Survay(),
+    const RegisterScreen(),
+    const Login()
+  ];
 
   @override
   Widget build(BuildContext context) {
