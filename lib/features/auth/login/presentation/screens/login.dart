@@ -25,7 +25,6 @@ class _LoginState extends State<Login> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login"),
-        titleSpacing: 16.w,
         centerTitle: false,
         leading: const Icon(Icons.arrow_back_ios),
       ),
@@ -124,8 +123,7 @@ class _LoginState extends State<Login> {
               const Text("Don't have an account?"),
               InkWell(
                   onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, RegisterScreen.routeName);
+                    Navigator.pushNamed(context, RegisterScreen.routeName);
                   },
                   child: const Text(
                     "Sign Up",

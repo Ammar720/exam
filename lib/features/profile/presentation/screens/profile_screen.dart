@@ -7,13 +7,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String routeName = '/profile';
-  const ProfileScreen({super.key, required this.user});
-  final UserModel user;
+  const ProfileScreen({super.key});
+  // final UserModel user;
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final UserModel user = UserModel(
+      username: 'ahmed',
+      email: 'ahmed123@gmail.com',
+      createdAt: DateTime.now(),
+      firstName: 'Ahmed',
+      id: '12345',
+      isVerified: true,
+      lastName: 'Safwat',
+      phone: '01010636562',
+      role: 'admin');
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _userNameController = TextEditingController();
@@ -28,11 +38,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
 
-    _userNameController.text = widget.user.username!;
-    _firstNameController.text = widget.user.firstName!;
-    _lastNameController.text = widget.user.lastName!;
-    _emailController.text = widget.user.email!;
-    _phoneNumberController.text = widget.user.phone!;
+    _userNameController.text = user.username!;
+    _firstNameController.text = user.firstName!;
+    _lastNameController.text = user.lastName!;
+    _emailController.text = user.email!;
+    _phoneNumberController.text = user.phone!;
 
     _userNameController.addListener(_checkIfEdited);
     _firstNameController.addListener(_checkIfEdited);
@@ -43,11 +53,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _checkIfEdited() {
     setState(() {
-      _isButtonEnabled = _userNameController.text != widget.user.username ||
-          _firstNameController.text != widget.user.firstName ||
-          _lastNameController.text != widget.user.lastName ||
-          _emailController.text != widget.user.email ||
-          _phoneNumberController.text != widget.user.phone;
+      _isButtonEnabled = _userNameController.text != user.username ||
+          _firstNameController.text != user.firstName ||
+          _lastNameController.text != user.lastName ||
+          _emailController.text != user.email ||
+          _phoneNumberController.text != user.phone;
     });
   }
 

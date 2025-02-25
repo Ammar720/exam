@@ -45,23 +45,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle labelTextStyle = TextStyle(
-      color: AppTheme.gray,
-      letterSpacing: 0.4.sp,
-    );
-    final TextStyle hintTextStyle = TextStyle(
-      color: AppTheme.placeHolder,
-      fontSize: 14.sp,
-      letterSpacing: 0.5.sp,
-    );
-    //_____________________________________
-
     return BlocProvider(
       create: (context) => getIt<RegisterViewModel>(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Sign up'),
-          titleSpacing: 16.w,
+          centerTitle: false,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -75,13 +64,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextFormField(
                         controller: _userNameController,
                         validator: Validator.validateUsername,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: 'User name',
-                          labelStyle: labelTextStyle,
                           border: const OutlineInputBorder(),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           hintText: 'Enter your user name',
-                          hintStyle: hintTextStyle,
                           contentPadding: EdgeInsets.all(16.sp),
                         ),
                       ),
@@ -92,14 +80,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: TextFormField(
                               controller: _firstNameController,
                               validator: Validator.validateFirstName,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                 labelText: 'First name',
-                                labelStyle: labelTextStyle,
                                 border: const OutlineInputBorder(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always,
                                 hintText: 'Enter first name',
-                                hintStyle: hintTextStyle,
                                 contentPadding: EdgeInsets.all(16.sp),
                               ),
                             ),
@@ -109,14 +97,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: TextFormField(
                               controller: _lastNameController,
                               validator: Validator.validateLastName,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                 labelText: 'Last name',
-                                labelStyle: labelTextStyle,
                                 border: const OutlineInputBorder(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always,
                                 hintText: 'Enter last name',
-                                hintStyle: hintTextStyle,
                                 contentPadding: EdgeInsets.all(16.sp),
                               ),
                             ),
@@ -127,13 +115,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextFormField(
                         controller: _emailController,
                         validator: Validator.validateEmail,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: 'Email',
-                          labelStyle: labelTextStyle,
                           border: const OutlineInputBorder(),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           hintText: 'Enter your email',
-                          hintStyle: hintTextStyle,
                           contentPadding: EdgeInsets.all(16.sp),
                         ),
                       ),
@@ -144,15 +131,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: TextFormField(
                               controller: _passwordController,
                               validator: Validator.validatePassword,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               obscureText: true,
                               decoration: InputDecoration(
                                 labelText: 'Password',
-                                labelStyle: labelTextStyle,
                                 border: const OutlineInputBorder(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always,
                                 hintText: 'Enter password',
-                                hintStyle: hintTextStyle,
                                 contentPadding: EdgeInsets.all(16.sp),
                               ),
                               keyboardType: TextInputType.visiblePassword,
@@ -165,15 +152,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               validator: (val) =>
                                   Validator.validateConfirmPassword(
                                       val, _passwordController.text),
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               obscureText: true,
                               decoration: InputDecoration(
                                 labelText: 'Confirm password',
-                                labelStyle: labelTextStyle,
                                 border: const OutlineInputBorder(),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always,
                                 hintText: 'Confirm password',
-                                hintStyle: hintTextStyle,
                                 contentPadding: EdgeInsets.all(16.sp),
                               ),
                               keyboardType: TextInputType.visiblePassword,
@@ -185,13 +172,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextFormField(
                         validator: Validator.validatePhoneNumber,
                         controller: _phoneNumberController,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           labelText: 'Phone number',
-                          labelStyle: labelTextStyle,
                           border: const OutlineInputBorder(),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           hintText: 'Enter phone number',
-                          hintStyle: hintTextStyle,
                           contentPadding: EdgeInsets.all(16.sp),
                         ),
                         keyboardType: TextInputType.phone,
@@ -241,7 +227,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: state.status == Status.loading
                                 ? SizedBox(
                                     width: double.infinity,
-                                    height: 40.h,
+                                    height: 30.h,
                                     child: Center(
                                       child: Transform.scale(
                                         scale: 4,

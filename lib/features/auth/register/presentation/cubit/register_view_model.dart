@@ -10,7 +10,7 @@ import 'package:injectable/injectable.dart';
 class RegisterViewModel extends Cubit<RegisterState> {
   final RegisterUseCase _registerUseCase;
   RegisterViewModel(this._registerUseCase)
-      : super(RegisterState(status: Status.loading));
+      : super(RegisterState(status: Status.initial));
 
   void register(RegisterRequestEntity userData) async {
     emit(state.copyWith(status: Status.loading, exception: null));
@@ -21,7 +21,8 @@ class RegisterViewModel extends Cubit<RegisterState> {
       if (result is SuccessApiResult<RegisterResponseEntity>) {
         emit(state.copyWith(status: Status.success, exception: null));
       } else if (result is ErrorApiResult<RegisterResponseEntity>) {
-        emit(state.copyWith(status: Status.error, exception: result.exception));
+        emit(state.copyWith(
+            status: Status.error, exception: Exception(result.exception)));
       }
     } on Exception catch (ex) {
       emit(state.copyWith(status: Status.error, exception: ex));

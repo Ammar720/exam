@@ -15,7 +15,3 @@ class ApiConstants {
 class StorageConstants {
   static const String tokenKey = "token";
 }
-
-class StorageConstants {
-  static const String tokenKey = "token";
-}
