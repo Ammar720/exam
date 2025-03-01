@@ -41,6 +41,16 @@ import 'package:exam/features/auth/forgetPassword/domain/usecases/verfiy_reset_c
     as _i126;
 import 'package:exam/features/auth/forgetPassword/presentation/viewModel/cubits/forget_password_cubit.dart'
     as _i326;
+import 'package:exam/features/auth/login/data/datasources/api_remote_datasource.dart'
+    as _i57;
+import 'package:exam/features/auth/login/data/datasources/remote_datasource.dart'
+    as _i1069;
+import 'package:exam/features/auth/login/data/ropositories/login_repo_impl.dart'
+    as _i968;
+import 'package:exam/features/auth/login/domain/ropositories/login_repo.dart'
+    as _i690;
+import 'package:exam/features/auth/login/domain/usecases/login_usecase.dart'
+    as _i1067;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -62,22 +72,30 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i402.ApiManager>(),
           gh<_i564.LocalDataSource>(),
         ));
+    gh.factory<_i1069.RemoteDatasource>(() => _i57.ApiRemoteDatasource(
+          gh<_i402.ApiManager>(),
+          gh<_i564.LocalDataSource>(),
+        ));
     gh.singleton<_i119.TokenRepository>(
         () => _i976.TokenRepositoryImpl(gh<_i564.LocalDataSource>()));
     gh.factory<_i271.ForgetPasswordRepo>(
         () => _i897.ForgetPasswordRepoImpl(gh<_i892.RemoteDataSources>()));
-    gh.factory<_i203.EnterEmail>(
-        () => _i203.EnterEmail(gh<_i271.ForgetPasswordRepo>()));
-    gh.factory<_i2.ResetPassword>(
-        () => _i2.ResetPassword(gh<_i271.ForgetPasswordRepo>()));
+    gh.factory<_i690.LoginRepo>(
+        () => _i968.LoginRepoImpl(gh<_i1069.RemoteDatasource>()));
     gh.factory<_i126.VerfiyResetCode>(
         () => _i126.VerfiyResetCode(gh<_i271.ForgetPasswordRepo>()));
-    gh.factory<_i132.DeleteToken>(
-        () => _i132.DeleteToken(gh<_i119.TokenRepository>()));
+    gh.factory<_i2.ResetPassword>(
+        () => _i2.ResetPassword(gh<_i271.ForgetPasswordRepo>()));
+    gh.factory<_i203.EnterEmail>(
+        () => _i203.EnterEmail(gh<_i271.ForgetPasswordRepo>()));
+    gh.factory<_i1067.LoginUsecase>(
+        () => _i1067.LoginUsecase(gh<_i690.LoginRepo>()));
     gh.factory<_i827.GetToken>(
         () => _i827.GetToken(gh<_i119.TokenRepository>()));
     gh.factory<_i289.SaveToken>(
         () => _i289.SaveToken(gh<_i119.TokenRepository>()));
+    gh.factory<_i132.DeleteToken>(
+        () => _i132.DeleteToken(gh<_i119.TokenRepository>()));
     gh.factory<_i326.ForgetPasswordCubit>(() => _i326.ForgetPasswordCubit(
           gh<_i203.EnterEmail>(),
           gh<_i126.VerfiyResetCode>(),
