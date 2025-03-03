@@ -4,7 +4,7 @@ import 'package:exam/core/utils/ui_utils.dart';
 import 'package:exam/core/utils/validator.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/viewModel/cubits/forget_password_cubit.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/viewModel/states/forget_password_states.dart';
-import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
+import 'package:exam/features/subjects/presentation/screens/lay_out.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

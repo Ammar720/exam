@@ -10,9 +10,9 @@ import 'package:exam/features/profile/presentation/screens/profile_screen.dart';
 import 'package:exam/features/profile/presentation/screens/reset_password_screen.dart';
 
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/reset_password.dart';
-import 'package:exam/features/exam/explore/presentation/screens/languages.dart';
-import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
-import 'package:exam/features/exam/explore/presentation/screens/survay.dart';
+import 'package:exam/features/exams/presentation/view/screens/exams.dart';
+import 'package:exam/features/subjects/presentation/screens/lay_out.dart';
+import 'package:exam/features/subjects/presentation/screens/survay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,7 +68,7 @@ class Exam extends StatelessWidget {
               ResetPassword.routeName: (context) => const ResetPassword(),
               LayOut.routeName: (context) => const LayOut(),
               Survay.routeName: (context) => const Survay(),
-              Languages.routeName: (context) => const Languages(),
+              Exams.routeName: (context) => const Exams(),
             },
             initialRoute: token != null ? LayOut.routeName : Login.routeName,
             theme: AppTheme.appThemeData,
