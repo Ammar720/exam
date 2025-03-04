@@ -6,6 +6,7 @@ import 'package:exam/features/auth/forgetPassword/presentation/view/screens/emai
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/forget_password.dart';
 import 'package:exam/features/auth/login/presentation/screens/login.dart';
 import 'package:exam/features/auth/register/presentation/screens/register_screen.dart';
+import 'package:exam/features/exams/presentation/view/screens/start_exam.dart';
 import 'package:exam/features/profile/presentation/screens/profile_screen.dart';
 import 'package:exam/features/profile/presentation/screens/reset_password_screen.dart';
 
@@ -69,6 +70,7 @@ class Exam extends StatelessWidget {
               LayOut.routeName: (context) => const LayOut(),
               Survay.routeName: (context) => const Survay(),
               Exams.routeName: (context) => const Exams(),
+              StartExam.routeName: (context) => const StartExam(),
             },
             initialRoute: token != null ? LayOut.routeName : Login.routeName,
             theme: AppTheme.appThemeData,
