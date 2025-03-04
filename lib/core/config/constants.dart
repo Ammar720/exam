@@ -10,7 +10,7 @@ class ApiConstants {
   static const String forgotPasswordEndpoint = "auth/forgotPassword";
   static const String verifyResetCodeEndpoint = "auth/verifyResetCode";
   static const String resetPasswordEndpoint = "auth/resetPassword";
-  
+  static const String examsEndpoint = "exams";
 }
 class StorageConstants {
   static const String tokenKey = "token";

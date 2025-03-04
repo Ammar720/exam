@@ -72,7 +72,8 @@ class Exam extends StatelessWidget {
               Exams.routeName: (context) => const Exams(),
               StartExam.routeName: (context) => const StartExam(),
             },
-            initialRoute: token != null ? LayOut.routeName : Login.routeName,
+            initialRoute: token != null ? Exams.routeName: Login.routeName,
+            // initialRoute: Exams.routeName,
             theme: AppTheme.appThemeData,
           );
         },

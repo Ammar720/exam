@@ -41,6 +41,18 @@ import 'package:exam/features/auth/forgetPassword/domain/usecases/verfiy_reset_c
     as _i126;
 import 'package:exam/features/auth/forgetPassword/presentation/viewModel/cubits/forget_password_cubit.dart'
     as _i326;
+import 'package:exam/features/exams/data/datasources/remote/exam_api_remote_data_source.dart'
+    as _i705;
+import 'package:exam/features/exams/data/datasources/remote/exam_remote_data_source.dart'
+    as _i50;
+import 'package:exam/features/exams/data/repositories/exam_repository_impl.dart'
+    as _i300;
+import 'package:exam/features/exams/domain/repositories/exam_repository.dart'
+    as _i1057;
+import 'package:exam/features/exams/domain/usecases/exam_use_case.dart'
+    as _i413;
+import 'package:exam/features/exams/presentation/view_model/exam_cubit.dart'
+    as _i370;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -58,14 +70,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i402.ApiManager>(() => _i402.ApiManager());
     gh.factory<_i564.LocalDataSource>(
         () => _i218.SecureStorageLocalDataSource());
+    gh.singleton<_i50.ExamRemoteDataSource>(() =>
+        _i705.ExamApiRemoteDataSource(apiManager: gh<_i402.ApiManager>()));
     gh.factory<_i892.RemoteDataSources>(() => _i735.ApiRemoteDataSource(
           gh<_i402.ApiManager>(),
           gh<_i564.LocalDataSource>(),
         ));
+    gh.singleton<_i1057.ExamRepository>(
+        () => _i300.ExamRepositoryImpl(gh<_i50.ExamRemoteDataSource>()));
     gh.singleton<_i119.TokenRepository>(
         () => _i976.TokenRepositoryImpl(gh<_i564.LocalDataSource>()));
     gh.factory<_i271.ForgetPasswordRepo>(
         () => _i897.ForgetPasswordRepoImpl(gh<_i892.RemoteDataSources>()));
+    gh.singleton<_i413.ExamUseCase>(
+        () => _i413.ExamUseCase(gh<_i1057.ExamRepository>()));
     gh.factory<_i203.EnterEmail>(
         () => _i203.EnterEmail(gh<_i271.ForgetPasswordRepo>()));
     gh.factory<_i2.ResetPassword>(
@@ -83,6 +101,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i126.VerfiyResetCode>(),
           gh<_i2.ResetPassword>(),
         ));
+    gh.singleton<_i370.ExamCubit>(
+        () => _i370.ExamCubit(gh<_i413.ExamUseCase>()));
     gh.factory<_i667.TokenCubit>(() => _i667.TokenCubit(
           gh<_i827.GetToken>(),
           gh<_i289.SaveToken>(),

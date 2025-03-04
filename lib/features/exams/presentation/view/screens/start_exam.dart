@@ -1,3 +1,4 @@
+import 'package:exam/features/exams/domain/entities/exam.dart';
 import 'package:exam/features/exams/presentation/view/screens/exams.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +11,7 @@ class StartExam extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Exam exams = ModalRoute.of(context)!.settings.arguments as Exam;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -37,14 +39,14 @@ class StartExam extends StatelessWidget {
                   ),
                   SizedBox(width: 8.w),
                   Text(
-                    'Languages',
+                    exams.title,
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge!
                         .copyWith(fontSize: 20.sp, fontWeight: FontWeight.w600),
                   ),
                   Spacer(),
-                  Text("30 Minutes",
+                  Text("${exams.duration} Minutes",
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium!
@@ -67,7 +69,7 @@ class StartExam extends StatelessWidget {
                     ),
                     SizedBox(width: 8.w),
                     Text(
-                      "20 Question",
+                      "${exams.numberOfQuestions} Question",
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
@@ -98,7 +100,11 @@ class StartExam extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '• Lorem ipsum dolor sit amet consectetur.\n• Lorem ipsum dolor sit amet consectetur.\n• Lorem ipsum dolor sit amet consectetur.\n• Lorem ipsum dolor sit amet consectetur.',
+                      '• Read each question carefully.\n'
+                      '• Manage your time wisely.\n'
+                      '• You can review and change answers.\n'
+                      '• Ensure a stable internet connection.\n'
+                      '• Timer expiry = auto submission.',
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: AppTheme.gray,
                             fontWeight: FontWeight.w500,

@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exam/core/resources/app_theme.dart';
+import 'package:exam/features/exams/domain/entities/exam.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExamItem extends StatelessWidget {
-  const ExamItem({super.key});
+  final Exam exam;
+  const ExamItem({super.key, required this.exam});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class ExamItem extends StatelessWidget {
                           .titleMedium!
                           .copyWith(fontWeight: FontWeight.w500)),
                   SizedBox(width: 83.w),
-                  Text("30 Minutes",
+                  Text('${exam.duration} Minutes',
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium!
@@ -54,18 +56,18 @@ class ExamItem extends StatelessWidget {
                 ],
               ),
               Text(
-                "20 Question",
+                "${exam.numberOfQuestions} Question",
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
                     .copyWith(fontSize: 13.sp),
               ),
-              SizedBox(height: 11.h),
-              Text("From: 1.0  To: 6.00",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w500, fontSize: 13.sp)),
+              // SizedBox(height: 11.h),
+              // Text("From: 1.0  To: 6.00",
+              //     style: Theme.of(context)
+              //         .textTheme
+              //         .bodyMedium!
+              //         .copyWith(fontWeight: FontWeight.w500, fontSize: 13.sp)),
             ],
           ),
         ],
