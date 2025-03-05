@@ -14,18 +14,17 @@ class RegisterViewModel extends Cubit<RegisterState> {
 
   void register(RegisterRequestEntity userData) async {
     emit(state.copyWith(status: Status.loading, exception: null));
-    try {
-      await Future.delayed(Duration(seconds: 5));
-      var result = await _registerUseCase.invoke(userData);
 
-      if (result is SuccessApiResult<RegisterResponseEntity>) {
+    await Future.delayed(Duration(seconds: 3));
+    var result = await _registerUseCase.invoke(userData);
+
+    switch (result) {
+      case (SuccessApiResult<RegisterResponseEntity>()):
         emit(state.copyWith(status: Status.success, exception: null));
-      } else if (result is ErrorApiResult<RegisterResponseEntity>) {
+
+      case (ErrorApiResult<RegisterResponseEntity>()):
         emit(state.copyWith(
             status: Status.error, exception: Exception(result.exception)));
-      }
-    } on Exception catch (ex) {
-      emit(state.copyWith(status: Status.error, exception: ex));
     }
   }
 }

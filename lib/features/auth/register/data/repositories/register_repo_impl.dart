@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:exam/core/api_manager/api_results.dart';
+import 'package:exam/core/utils/error_handler.dart';
 import 'package:exam/features/auth/core/data/data_source/local_data_source/local_data_source.dart';
 import 'package:exam/features/auth/register/data/data_source/remote/register_remote_data_source.dart';
 import 'package:exam/features/auth/register/data/models/register_request_dto.dart';
@@ -34,7 +35,7 @@ class RegisterRepoImpl implements RegisterRepo {
           e.response?.data['message'] ?? 'Something went wrong';
       return ErrorApiResult(errorMessage);
     } catch (ex) {
-      return ErrorApiResult(ex.toString());
+      return ErrorApiResult(ErrorHandler.getErrorMessage(ex));
     }
   }
 }
