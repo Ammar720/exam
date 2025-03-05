@@ -6,5 +6,6 @@ import 'package:injectable/injectable.dart';
 class VerfiyResetCode {
   final ForgetPasswordRepo _repo;
   VerfiyResetCode(this._repo);
-  Future<ApiResult<void>> call(String resetCode) => _repo.verfiyResetCode(resetCode);
+  Future<ApiResult<void>> call(String resetCode) =>
+      _repo.verfiyResetCode(resetCode);
 }
