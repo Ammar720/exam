@@ -43,8 +43,9 @@ class AppTheme {
     textTheme: textTheme,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
-      titleSpacing: 0,
+      titleSpacing: 12.w,
       titleTextStyle: textTheme.titleLarge,
+      centerTitle: false,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -67,6 +68,7 @@ class AppTheme {
         ),
       ),
     ),
+    
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: textTheme.bodyLarge,
       hintStyle: textTheme.bodyLarge,
@@ -74,6 +76,7 @@ class AppTheme {
       focusedBorder: const OutlineInputBorder(),
       floatingLabelBehavior: FloatingLabelBehavior.always,
       contentPadding: EdgeInsets.all(16.sp),
+    
     ),
   );
 }

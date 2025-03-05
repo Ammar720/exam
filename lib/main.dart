@@ -1,6 +1,6 @@
+import 'package:exam/core/app_bloc_observer.dart';
 import 'package:exam/core/di/di.dart';
 import 'package:exam/features/auth/core/presentation/cubit/token_cubit.dart';
-import 'package:exam/features/auth/register/data/models/user_model.dart';
 import 'package:exam/core/resources/app_theme.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/email_verification.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/forget_password.dart';
@@ -20,7 +20,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-
+  Bloc.observer = AppBlocObserver();
   final tokenCubit = getIt<TokenCubit>();
   await tokenCubit.loadToken();
 
@@ -37,17 +37,6 @@ class Exam extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserModel user = UserModel(
-        username: 'ahmed',
-        email: 'ahmed123@gmail.com',
-        createdAt: DateTime.now(),
-        firstName: 'Ahmed',
-        id: '12345',
-        isVerified: true,
-        lastName: 'Safwat',
-        phone: '01010636562',
-        role: 'admin');
-
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -59,7 +48,7 @@ class Exam extends StatelessWidget {
             routes: {
               Login.routeName: (context) => const Login(),
               RegisterScreen.routeName: (context) => const RegisterScreen(),
-              ProfileScreen.routeName: (context) => ProfileScreen(user: user),
+              ProfileScreen.routeName: (context) => ProfileScreen(),
               ResetPasswordScreen.routeName: (context) =>
                   const ResetPasswordScreen(),
               ForgetPassword.routeName: (context) => ForgetPassword(),
@@ -70,7 +59,7 @@ class Exam extends StatelessWidget {
               Survay.routeName: (context) => const Survay(),
               Exams.routeName: (context) => const Exams(),
             },
-            initialRoute: token != null ? LayOut.routeName : Login.routeName,
+            initialRoute: token == null ? LayOut.routeName : Login.routeName,
             theme: AppTheme.appThemeData,
           );
         },
