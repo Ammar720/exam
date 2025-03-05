@@ -1,6 +1,6 @@
 import 'package:exam/core/resources/app_theme.dart';
-import 'package:exam/features/auth/login/presentation/screens/login.dart';
 import 'package:exam/features/auth/register/presentation/screens/register_screen.dart';
+import 'package:exam/features/profile/presentation/screens/profile_screen.dart';
 import 'package:exam/features/subjects/presentation/screens/survay.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class _SurveyState extends State<LayOut> {
   List<Widget> screens = [
     const Survay(),
     const RegisterScreen(),
-    const Login()
+    ProfileScreen()
   ];
 
   @override

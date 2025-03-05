@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -41,6 +42,18 @@ import 'package:exam/features/auth/forgetPassword/domain/usecases/verfiy_reset_c
     as _i126;
 import 'package:exam/features/auth/forgetPassword/presentation/viewModel/cubits/forget_password_cubit.dart'
     as _i326;
+import 'package:exam/features/auth/register/data/data_source/remote/register_api_data_source.dart'
+    as _i40;
+import 'package:exam/features/auth/register/data/data_source/remote/register_remote_data_source.dart'
+    as _i1058;
+import 'package:exam/features/auth/register/data/repositories/register_repo_impl.dart'
+    as _i849;
+import 'package:exam/features/auth/register/domain/contract/register_repo.dart'
+    as _i676;
+import 'package:exam/features/auth/register/domain/usecase/register_usecase.dart'
+    as _i473;
+import 'package:exam/features/auth/register/presentation/cubit/register_view_model.dart'
+    as _i499;
 import 'package:exam/features/exams/data/datasources/remote/exam_api_remote_data_source.dart'
     as _i705;
 import 'package:exam/features/exams/data/datasources/remote/exam_remote_data_source.dart'
@@ -70,6 +83,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i402.ApiManager>(() => _i402.ApiManager());
     gh.factory<_i564.LocalDataSource>(
         () => _i218.SecureStorageLocalDataSource());
+    gh.factory<_i1058.RegisterRemoteDataSource>(
+        () => _i40.RegisterApiDataSource(gh<_i402.ApiManager>()));
     gh.singleton<_i50.ExamRemoteDataSource>(() =>
         _i705.ExamApiRemoteDataSource(apiManager: gh<_i402.ApiManager>()));
     gh.factory<_i892.RemoteDataSources>(() => _i735.ApiRemoteDataSource(
@@ -84,23 +99,29 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i897.ForgetPasswordRepoImpl(gh<_i892.RemoteDataSources>()));
     gh.singleton<_i413.ExamUseCase>(
         () => _i413.ExamUseCase(gh<_i1057.ExamRepository>()));
-    gh.factory<_i203.EnterEmail>(
-        () => _i203.EnterEmail(gh<_i271.ForgetPasswordRepo>()));
-    gh.factory<_i2.ResetPassword>(
-        () => _i2.ResetPassword(gh<_i271.ForgetPasswordRepo>()));
+    gh.factory<_i676.RegisterRepo>(() => _i849.RegisterRepoImpl(
+          gh<_i1058.RegisterRemoteDataSource>(),
+          gh<_i564.LocalDataSource>(),
+        ));
     gh.factory<_i126.VerfiyResetCode>(
         () => _i126.VerfiyResetCode(gh<_i271.ForgetPasswordRepo>()));
-    gh.factory<_i132.DeleteToken>(
-        () => _i132.DeleteToken(gh<_i119.TokenRepository>()));
+    gh.factory<_i2.ResetPassword>(
+        () => _i2.ResetPassword(gh<_i271.ForgetPasswordRepo>()));
+    gh.factory<_i203.EnterEmail>(
+        () => _i203.EnterEmail(gh<_i271.ForgetPasswordRepo>()));
     gh.factory<_i827.GetToken>(
         () => _i827.GetToken(gh<_i119.TokenRepository>()));
     gh.factory<_i289.SaveToken>(
         () => _i289.SaveToken(gh<_i119.TokenRepository>()));
+    gh.factory<_i132.DeleteToken>(
+        () => _i132.DeleteToken(gh<_i119.TokenRepository>()));
     gh.factory<_i326.ForgetPasswordCubit>(() => _i326.ForgetPasswordCubit(
           gh<_i203.EnterEmail>(),
           gh<_i126.VerfiyResetCode>(),
           gh<_i2.ResetPassword>(),
         ));
+    gh.factory<_i473.RegisterUseCase>(
+        () => _i473.RegisterUseCase(gh<_i676.RegisterRepo>()));
     gh.singleton<_i370.ExamCubit>(
         () => _i370.ExamCubit(gh<_i413.ExamUseCase>()));
     gh.factory<_i667.TokenCubit>(() => _i667.TokenCubit(
@@ -108,6 +129,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i289.SaveToken>(),
           gh<_i132.DeleteToken>(),
         ));
+    gh.factory<_i499.RegisterViewModel>(
+        () => _i499.RegisterViewModel(gh<_i473.RegisterUseCase>()));
     return this;
   }
 }

@@ -1,3 +1,5 @@
+import 'package:exam/features/auth/register/domain/entities/user.dart';
+
 class UserModel {
   final String? username;
   final String? firstName;
@@ -46,4 +48,15 @@ class UserModel {
         '_id': id,
         'createdAt': createdAt?.toIso8601String(),
       };
+
+  //  from UserModel to User Entity
+   User toUser() {
+    return User(
+      username: username,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+    );
+  }
 }
