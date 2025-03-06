@@ -2,7 +2,9 @@ import 'package:exam/core/api_manager/api_results.dart';
 import 'package:exam/features/auth/login/domain/usecases/login_usecase.dart';
 import 'package:exam/features/auth/login/presentation/viewModel/states/login_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
+@singleton
 class LoginCubit extends Cubit<LoginStates> {
   final LoginUsecase _loginUsecase;
 

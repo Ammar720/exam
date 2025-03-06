@@ -17,7 +17,7 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: LoginRepo)
 class LoginRepoImpl implements LoginRepo {
-  RemoteDatasource _remoteDatasource;
+  final RemoteDatasource _remoteDatasource;
 
   LoginRepoImpl(this._remoteDatasource);
 

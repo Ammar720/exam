@@ -32,10 +32,9 @@ class _LoginState extends State<Login> {
             title: const Text("Login"),
             titleSpacing: 16.w,
             centerTitle: false,
-            leading: const Icon(Icons.arrow_back_ios),
           ),
           body: Padding(
-            padding: const EdgeInsets.only(top: 24, left: 16, right: 16),
+            padding: EdgeInsets.only(top: 24.h, left: 16.w, right: 16.w),
             child: Column(
               children: [
                 Form(
@@ -48,16 +47,9 @@ class _LoginState extends State<Login> {
                             ?.copyWith(color: AppTheme.black),
                         validator: Validator.validateEmail,
                         decoration: InputDecoration(
-                            labelText: "Email",
-                            labelStyle: AppTheme
-                                .appThemeData.textTheme.bodySmall
-                                ?.copyWith(color: AppTheme.black),
-                            focusedBorder: const OutlineInputBorder(),
-                            border: const OutlineInputBorder(),
-                            enabledBorder: const OutlineInputBorder(),
-                            errorBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red)),
-                            hintText: "Enter your email"),
+                          labelText: "Email",
+                          hintText: "Enter your email",
+                        ),
                       ),
                       SizedBox(
                         height: 24.sp,
@@ -70,16 +62,9 @@ class _LoginState extends State<Login> {
                             ?.copyWith(color: AppTheme.black),
                         validator: Validator.validatePassword,
                         decoration: InputDecoration(
-                            labelText: "Password",
-                            labelStyle: AppTheme
-                                .appThemeData.textTheme.bodySmall
-                                ?.copyWith(color: AppTheme.black),
-                            focusedBorder: const OutlineInputBorder(),
-                            border: const OutlineInputBorder(),
-                            enabledBorder: const OutlineInputBorder(),
-                            errorBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red)),
-                            hintText: "Enter your Password"),
+                          labelText: "Password",
+                          hintText: "Enter your Password",
+                        ),
                       ),
                     ],
                   ),
