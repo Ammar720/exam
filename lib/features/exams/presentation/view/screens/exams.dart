@@ -2,9 +2,9 @@ import 'package:exam/core/resources/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Languages extends StatelessWidget {
-  static const String routeName = "/languges";
-  const Languages({super.key});
+class Exams extends StatelessWidget {
+  static const String routeName = "/exams";
+  const Exams({super.key});
 
   @override
   Widget build(BuildContext context) {
