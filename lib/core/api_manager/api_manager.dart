@@ -22,7 +22,7 @@ class ApiManager {
         if (result is SuccessApiResult<String?>) {
           final token = result.data;
           if (token != null) {
-            options.headers["Authorization"] = "Bearer $token";
+            options.headers[StorageConstants.tokenKey] = token;
           }
         }
 

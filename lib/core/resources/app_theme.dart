@@ -14,6 +14,7 @@ class AppTheme {
   static const Color lightRed = Color(0xffF8D2D2);
   static const Color placeHolder = Color(0xffA6A6A6);
   static const Color verifyCode = Color(0xffdfe7f7);
+  static const Color boxShadow = Color(0x2A292940);
 
   static final TextTheme textTheme = TextTheme(
     titleLarge: TextStyle(
