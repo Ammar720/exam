@@ -1,10 +1,14 @@
 import 'package:exam/core/di/di.dart';
 import 'package:exam/core/resources/app_theme.dart';
+import 'package:exam/core/utils/ui_utils.dart';
 import 'package:exam/core/utils/validator.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/forget_password.dart';
 import 'package:exam/features/auth/login/presentation/viewModel/cubits/login_cubit.dart';
+import 'package:exam/features/auth/login/presentation/viewModel/states/login_states.dart';
 import 'package:exam/features/auth/register/presentation/screens/register_screen.dart';
+// import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
 import 'package:exam/features/subjects/presentation/screens/lay_out.dart';
+import 'package:exam/features/subjects/presentation/view/screens/subjects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -97,18 +101,33 @@ class _LoginState extends State<Login> {
                 ),
                 Row(
                   children: [
-                    Expanded(
-                      child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamed(context, LayOut.routeName);
-                            }
-                          },
-                          child: Text(
-                            "Login",
-                            style: AppTheme.appThemeData.textTheme.titleMedium
-                                ?.copyWith(color: AppTheme.white),
-                          )),
+                    BlocListener<LoginCubit, LoginStates>(
+                      listener: (context, state) {
+                        if (state is LoginLoading) {
+                          UIUtils.showLoading(context);
+                        } else {
+                          UIUtils.hideLoading(context);
+                        }
+                        if (state is LoginSuccess) {
+                          Navigator.pushNamed(context, Survay.routeName,
+                              arguments: _emailController.text);
+                        } else if (state is LoginError) {
+                          UIUtils.showMessage(state.message);
+                        }
+                      },
+                      child: Expanded(
+                        child: ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.pushNamed(context, LayOut.routeName);
+                              }
+                            },
+                            child: Text(
+                              "Login",
+                              style: AppTheme.appThemeData.textTheme.titleMedium
+                                  ?.copyWith(color: AppTheme.white),
+                            )),
+                      ),
                     ),
                   ],
                 ),
