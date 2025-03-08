@@ -27,7 +27,7 @@ class _ExamsState extends State<Exams> {
         child: Scaffold(
           appBar: AppBar(
             title: Text("Languages"),
-            centerTitle: false,
+            titleSpacing: 0,
             leading: const Icon(Icons.arrow_back_ios_new),
           ),
           body: BlocBuilder<ExamCubit, ExamStates>(builder: (context, state) {

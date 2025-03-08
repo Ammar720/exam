@@ -1,5 +1,6 @@
 import 'package:exam/features/exams/domain/entities/exam.dart';
 import 'package:exam/features/exams/presentation/view/screens/exams.dart';
+import 'package:exam/features/questions/presentation/view/screens/questions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/resources/app_theme.dart';
@@ -114,7 +115,7 @@ class StartExam extends StatelessWidget {
                 ),
                 SizedBox(height: 48.h),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed:() => Navigator.pushReplacementNamed(context, Questions.routeName),
                   child: Text(
                     "Start",
                   ),
