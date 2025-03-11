@@ -77,6 +77,18 @@ import 'package:exam/features/exams/domain/usecases/exam_use_case.dart'
     as _i413;
 import 'package:exam/features/exams/presentation/view_model/exam_cubit.dart'
     as _i370;
+import 'package:exam/features/questions/data/datasources/remote/questions_api_remote_data_source.dart'
+    as _i772;
+import 'package:exam/features/questions/data/datasources/remote/questions_remote_data_source.dart'
+    as _i906;
+import 'package:exam/features/questions/data/repositories/questions_repository_impl.dart'
+    as _i778;
+import 'package:exam/features/questions/domain/repositories/questions_repository.dart'
+    as _i28;
+import 'package:exam/features/questions/domain/usecases/get_questions_use_case.dart'
+    as _i145;
+import 'package:exam/features/questions/presentation/cubit/questions_cubit.dart'
+    as _i501;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -92,10 +104,14 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.singleton<_i402.ApiManager>(() => _i402.ApiManager());
+    gh.singleton<_i906.QuestionsRemoteDataSource>(
+        () => _i772.QuestionsApiRemoteDataSource(gh<_i402.ApiManager>()));
     gh.factory<_i564.LocalDataSource>(
         () => _i218.SecureStorageLocalDataSource());
     gh.singleton<_i50.ExamRemoteDataSource>(() =>
         _i705.ExamApiRemoteDataSource(apiManager: gh<_i402.ApiManager>()));
+    gh.singleton<_i28.QuestionsRepository>(() =>
+        _i778.QuestionsRepositoryImpl(gh<_i906.QuestionsRemoteDataSource>()));
     gh.factory<_i1058.RegisterRemoteDataSource>(
         () => _i40.RegisterApiDataSource(gh<_i402.ApiManager>()));
     gh.factory<_i892.RemoteDataSources>(() => _i735.ApiRemoteDataSource(
@@ -110,6 +126,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i300.ExamRepositoryImpl(gh<_i50.ExamRemoteDataSource>()));
     gh.singleton<_i119.TokenRepository>(
         () => _i976.TokenRepositoryImpl(gh<_i564.LocalDataSource>()));
+    gh.singleton<_i145.GetQuestionsUseCase>(
+        () => _i145.GetQuestionsUseCase(gh<_i28.QuestionsRepository>()));
     gh.factory<_i271.ForgetPasswordRepo>(
         () => _i897.ForgetPasswordRepoImpl(gh<_i892.RemoteDataSources>()));
     gh.factory<_i690.LoginRepo>(
@@ -139,6 +157,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i126.VerfiyResetCode>(),
           gh<_i2.ResetPassword>(),
         ));
+    gh.singleton<_i501.QuestionsCubit>(
+        () => _i501.QuestionsCubit(gh<_i145.GetQuestionsUseCase>()));
     gh.singleton<_i370.ExamCubit>(
         () => _i370.ExamCubit(gh<_i413.ExamUseCase>()));
     gh.factory<_i473.RegisterUseCase>(

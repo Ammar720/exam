@@ -115,7 +115,11 @@ class StartExam extends StatelessWidget {
                 ),
                 SizedBox(height: 48.h),
                 ElevatedButton(
-                  onPressed:() => Navigator.pushReplacementNamed(context, Questions.routeName),
+                  onPressed: () => Navigator.pushReplacementNamed(
+                    context,
+                    Questions.routeName,
+                    arguments: exams,
+                  ),
                   child: Text(
                     "Start",
                   ),

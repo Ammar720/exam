@@ -50,7 +50,7 @@ class UserModel {
       };
 
   //  from UserModel to User Entity
-   User toUser() {
+  User toUser() {
     return User(
       username: username,
       email: email,

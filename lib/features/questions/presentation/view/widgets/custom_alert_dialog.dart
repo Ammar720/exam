@@ -9,42 +9,42 @@ class CustomAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        backgroundColor: AppTheme.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        content: SizedBox(
-          width: 289.w,
-          height: 230.h,
-          child: Padding(
-            padding: EdgeInsets.all(24.sp),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Image.asset(
-                    'assets/images/sand-clock 1.png',
-                    fit: BoxFit.fill,
-                    width: 45.w,
-                    height: 86.h,
-                  ),
-                  Text("Time out!!",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(fontSize: 24.sp, color: AppTheme.error)),
-                ]),
-                SizedBox(height: 24.h),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, ExamScore.routeName);
-                  },
-                  child: Text("View Score"),
+      backgroundColor: AppTheme.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      content: SizedBox(
+        width: 289.w,
+        height: 230.h,
+        child: Padding(
+          padding: EdgeInsets.all(24.sp),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Image.asset(
+                  'assets/images/sand-clock 1.png',
+                  fit: BoxFit.fill,
+                  width: 45.w,
+                  height: 86.h,
                 ),
-              ],
-            ),
+                Text("Time out!!",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(fontSize: 24.sp, color: AppTheme.error)),
+              ]),
+              SizedBox(height: 24.h),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, ExamScore.routeName);
+                },
+                child: Text("View Score"),
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
   }
 }

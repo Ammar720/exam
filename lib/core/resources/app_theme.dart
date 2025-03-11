@@ -50,7 +50,6 @@ class AppTheme {
       centerTitle: false,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
-      
       style: ButtonStyle(
         elevation: WidgetStatePropertyAll(0),
         backgroundColor: const WidgetStatePropertyAll(blue),
@@ -72,7 +71,6 @@ class AppTheme {
         ),
       ),
     ),
-    
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: textTheme.bodyLarge,
       hintStyle: textTheme.bodyLarge,
@@ -80,7 +78,6 @@ class AppTheme {
       focusedBorder: const OutlineInputBorder(),
       floatingLabelBehavior: FloatingLabelBehavior.always,
       contentPadding: EdgeInsets.all(16.sp),
-    
     ),
   );
 }

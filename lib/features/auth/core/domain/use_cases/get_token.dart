@@ -8,7 +8,7 @@ class GetToken {
 
   GetToken(this._repository);
 
-  Future<ApiResult<String?>> call()async {
+  Future<ApiResult<String?>> call() async {
     final result = await _repository.getToken();
     return result;
   }

@@ -1,11 +1,13 @@
 import 'package:exam/core/resources/app_theme.dart';
+import 'package:exam/features/questions/data/models/get_questions_response/answer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChoiceItem extends StatelessWidget {
   final int index;
+  final List<Answer> answers;
   final int? selectedAnswer;
-  final List<String> answers;
+  
   const ChoiceItem(
       {super.key,
       required this.index,
@@ -49,7 +51,7 @@ class ChoiceItem extends StatelessWidget {
             SizedBox(width: 18.w),
             Expanded(
               child: Text(
-                answers[index],
+                answers[index].answer,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
