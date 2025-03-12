@@ -4,9 +4,11 @@ import 'package:exam/core/widgets/error_indicator.dart';
 import 'package:exam/core/widgets/loding_indicator.dart';
 import 'package:exam/features/exams/domain/entities/exam.dart';
 import 'package:exam/features/exams/presentation/view/screens/exams.dart';
+import 'package:exam/features/questions/domain/entities/check_questions_entity.dart';
 import 'package:exam/features/questions/domain/entities/question.dart';
 import 'package:exam/features/questions/presentation/cubit/questions_cubit.dart';
 import 'package:exam/features/questions/presentation/cubit/questions_states.dart';
+import 'package:exam/features/questions/presentation/view/screens/exam_score.dart';
 import 'package:exam/features/questions/presentation/view/widgets/choice_item.dart';
 import 'package:exam/features/questions/presentation/view/widgets/custom_alert_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,22 +28,29 @@ class _QuestionsState extends State<Questions> {
   final bool isAnswered = false;
   final ValueNotifier<Color> counterColor =
       ValueNotifier<Color>(AppTheme.success);
-
   final QuestionsCubit questionsCubit = getIt<QuestionsCubit>();
-
-  void _onExamEnd() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => CustomAlertDialog(),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     final Exam exam = ModalRoute.of(context)!.settings.arguments as Exam;
     final int examDuration = 60 * exam.duration;
     DateTime endTime = DateTime.now().add(Duration(seconds: examDuration));
+    DateTime startTime = DateTime.now();
+
+    void onExamEnd() {
+      int timeSpent =
+          examDuration - DateTime.now().difference(startTime).inSeconds;
+      questionsCubit.checkQuestions(timeSpent);
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => CustomAlertDialog(
+          timeSpent: timeSpent,
+          questionsCubit: questionsCubit,
+          exam: exam,
+        ),
+      );
+    }
 
     return BlocProvider<QuestionsCubit>(
       create: (context) => questionsCubit..getQuestions(exam.id),
@@ -67,7 +76,7 @@ class _QuestionsState extends State<Questions> {
               builder: (context, value, child) => TimerCountdown(
                 format: CountDownTimerFormat.minutesSeconds,
                 endTime: endTime,
-                onEnd: _onExamEnd,
+                onEnd: onExamEnd,
                 enableDescriptions: false,
                 timeTextStyle: Theme.of(context)
                     .textTheme
@@ -153,20 +162,21 @@ class _QuestionsState extends State<Questions> {
                           ),
                           SizedBox(height: 80.h),
                           Row(children: [
+                            
                             ElevatedButton(
-                              onPressed: () {
-                                context
-                                    .read<QuestionsCubit>()
-                                    .goToPreviousQuestion();
-                              },
+                              onPressed: state.questionIndex! > 0
+                                  ? () {
+                                      context
+                                          .read<QuestionsCubit>()
+                                          .goToPreviousQuestion();
+                                    }
+                                  : null, 
                               style: ElevatedButton.styleFrom(
                                 minimumSize: Size(163.w, 48.h),
                                 backgroundColor: AppTheme.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.r),
-                                  side: BorderSide(
-                                    color: AppTheme.blue,
-                                  ),
+                                  side: BorderSide(color: AppTheme.blue),
                                 ),
                               ),
                               child: Text(
@@ -180,24 +190,57 @@ class _QuestionsState extends State<Questions> {
                                     ),
                               ),
                             ),
+
                             SizedBox(width: 16.w),
+
+                           
                             ElevatedButton(
-                              onPressed: () {
-                                context
-                                    .read<QuestionsCubit>()
-                                    .goToNextQuestion();
+                              onPressed: () async {
+                                if (state.questionIndex ==
+                                    state.questions.length - 1) {
+                              
+                                  int timeSpent = exam.duration * 60 -
+                                      DateTime.now()
+                                          .difference(startTime)
+                                          .inSeconds;
+
+                             
+                                  await questionsCubit
+                                      .checkQuestions(timeSpent);
+
+                            
+                                  if (context.mounted) {
+                                    Navigator.pushReplacementNamed(
+                                      context,
+                                      ExamScore.routeName,
+                                      arguments: {
+                                        'result': (questionsCubit.state
+                                                as QuestionsSuccess<
+                                                    CheckQuestionsEntity>)
+                                            .questions,
+                                        'exam': exam,
+                                      },
+                                    );
+                                  }
+                                } else {
+                                  context
+                                      .read<QuestionsCubit>()
+                                      .goToNextQuestion();
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 minimumSize: Size(163.w, 48.h),
                                 backgroundColor: AppTheme.blue,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    side: BorderSide(
-                                      color: AppTheme.white,
-                                    )),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  side: BorderSide(color: AppTheme.white),
+                                ),
                               ),
                               child: Text(
-                                'Next',
+                                state.questionIndex ==
+                                        state.questions.length - 1
+                                    ? 'Submit'
+                                    : 'Next',
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleMedium!

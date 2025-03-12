@@ -11,8 +11,8 @@ class QuestionsError extends QuestionsStates {
 
 class QuestionsSuccess<T> extends QuestionsStates {
   final T questions;
-  final int? questionIndex;
+  final int? questionIndex ;
   final Map<int, int?>? selectedAnswers;
 
-  QuestionsSuccess(this.questions, this.questionIndex, this.selectedAnswers);
+  QuestionsSuccess(this.questions, {this.questionIndex , this.selectedAnswers});
 }

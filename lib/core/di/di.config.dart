@@ -85,6 +85,8 @@ import 'package:exam/features/questions/data/repositories/questions_repository_i
     as _i778;
 import 'package:exam/features/questions/domain/repositories/questions_repository.dart'
     as _i28;
+import 'package:exam/features/questions/domain/usecases/check_questions_use_case.dart'
+    as _i388;
 import 'package:exam/features/questions/domain/usecases/get_questions_use_case.dart'
     as _i145;
 import 'package:exam/features/questions/presentation/cubit/questions_cubit.dart'
@@ -128,8 +130,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i976.TokenRepositoryImpl(gh<_i564.LocalDataSource>()));
     gh.singleton<_i145.GetQuestionsUseCase>(
         () => _i145.GetQuestionsUseCase(gh<_i28.QuestionsRepository>()));
+    gh.singleton<_i388.CheckQuestionsUseCase>(
+        () => _i388.CheckQuestionsUseCase(gh<_i28.QuestionsRepository>()));
     gh.factory<_i271.ForgetPasswordRepo>(
         () => _i897.ForgetPasswordRepoImpl(gh<_i892.RemoteDataSources>()));
+    gh.singleton<_i501.QuestionsCubit>(() => _i501.QuestionsCubit(
+          gh<_i145.GetQuestionsUseCase>(),
+          gh<_i388.CheckQuestionsUseCase>(),
+        ));
     gh.factory<_i690.LoginRepo>(
         () => _i968.LoginRepoImpl(gh<_i1069.RemoteDatasource>()));
     gh.singleton<_i413.ExamUseCase>(
@@ -157,8 +165,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i126.VerfiyResetCode>(),
           gh<_i2.ResetPassword>(),
         ));
-    gh.singleton<_i501.QuestionsCubit>(
-        () => _i501.QuestionsCubit(gh<_i145.GetQuestionsUseCase>()));
     gh.singleton<_i370.ExamCubit>(
         () => _i370.ExamCubit(gh<_i413.ExamUseCase>()));
     gh.factory<_i473.RegisterUseCase>(

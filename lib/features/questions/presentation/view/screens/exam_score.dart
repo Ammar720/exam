@@ -1,15 +1,29 @@
 import 'package:exam/core/resources/app_theme.dart';
+import 'package:exam/features/exams/domain/entities/exam.dart';
 import 'package:exam/features/exams/presentation/view/screens/exams.dart';
+import 'package:exam/features/questions/domain/entities/check_questions_entity.dart';
+import 'package:exam/features/questions/presentation/view/screens/questions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ExamScore extends StatelessWidget {
   static const routeName = '/exam_score';
-  const ExamScore({super.key});
+  const ExamScore({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final CheckQuestionsEntity result = args['result'] as CheckQuestionsEntity;
+    final Exam exam = args['exam'] as Exam;
+
+    double correctPercentage =
+        double.tryParse(result.total.replaceAll('%', '')) ?? 0;
+    String formattedPercentage = correctPercentage.toStringAsFixed(0);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Exam Score'),
@@ -37,11 +51,11 @@ class ExamScore extends StatelessWidget {
                 child: CircularPercentIndicator(
                   radius: 60.r,
                   lineWidth: 7.w,
-                  percent: 80 / 100,
+                  percent:  correctPercentage/100 ,
                   animation: true,
                   animationDuration: 1200,
                   center: Text(
-                    "80%",
+                    "$formattedPercentage%",
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge!
@@ -77,7 +91,7 @@ class ExamScore extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          '18',
+                          result.correct.toString(),
                           style: Theme.of(context)
                               .textTheme
                               .titleLarge!
@@ -106,7 +120,7 @@ class ExamScore extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          '2',
+                          result.wrong.toString(),
                           style: Theme.of(context)
                               .textTheme
                               .titleLarge!
@@ -123,7 +137,10 @@ class ExamScore extends StatelessWidget {
           ElevatedButton(onPressed: () {}, child: Text('Show results')),
           SizedBox(height: 24.h),
           ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, Questions.routeName,
+                    arguments: exam);
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.white,
                 foregroundColor: AppTheme.blue,

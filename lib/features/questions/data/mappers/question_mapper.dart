@@ -1,4 +1,5 @@
 
+import 'package:exam/features/exams/data/mappers/exam_mapper.dart';
 import 'package:exam/features/questions/data/models/get_questions_response/question_model.dart';
 import 'package:exam/features/questions/domain/entities/question.dart';
 
@@ -8,5 +9,6 @@ extension QuestionMapper on QuestionModel {
       question: question,
       answers: answers,
       correct: correct,
+      exam: exam.toEntity()
       );
 }

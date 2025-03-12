@@ -1,10 +1,21 @@
 import 'package:exam/core/resources/app_theme.dart';
+import 'package:exam/features/exams/domain/entities/exam.dart';
+import 'package:exam/features/questions/domain/entities/check_questions_entity.dart';
+import 'package:exam/features/questions/presentation/cubit/questions_cubit.dart';
+import 'package:exam/features/questions/presentation/cubit/questions_states.dart';
 import 'package:exam/features/questions/presentation/view/screens/exam_score.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAlertDialog extends StatelessWidget {
-  const CustomAlertDialog({super.key});
+  final int timeSpent;
+  final QuestionsCubit questionsCubit;
+  final Exam exam;
+  const CustomAlertDialog(
+      {super.key,
+      required this.timeSpent,
+      required this.questionsCubit,
+      required this.exam});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +48,15 @@ class CustomAlertDialog extends StatelessWidget {
               SizedBox(height: 24.h),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, ExamScore.routeName);
+                  Navigator.pushReplacementNamed(
+                    context,
+                    ExamScore.routeName,
+                    arguments: {
+                      'result': (questionsCubit.state
+                          as QuestionsSuccess<CheckQuestionsEntity>).questions,
+                      'exam': exam
+                    },
+                  );
                 },
                 child: Text("View Score"),
               ),
