@@ -8,7 +8,8 @@ import 'package:exam/features/auth/login/presentation/viewModel/states/login_sta
 import 'package:exam/features/auth/register/presentation/screens/register_screen.dart';
 // import 'package:exam/features/exam/explore/presentation/screens/lay_out.dart';
 import 'package:exam/features/subjects/presentation/screens/lay_out.dart';
-import 'package:exam/features/subjects/presentation/view/screens/subjects.dart';
+import 'package:exam/features/subjects/presentation/screens/survay.dart';
+// import 'package:exam/features/subjects/presentation/view/screens/subjects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
