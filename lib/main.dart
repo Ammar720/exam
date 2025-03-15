@@ -2,6 +2,7 @@ import 'package:exam/core/app_bloc_observer.dart';
 import 'package:exam/core/di/di.dart';
 import 'package:exam/features/auth/core/presentation/cubit/token_cubit.dart';
 import 'package:exam/core/resources/app_theme.dart';
+import 'package:exam/features/auth/core/presentation/cubit/token_state.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/email_verification.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/forget_password.dart';
 import 'package:exam/features/auth/login/presentation/view/screens/login.dart';
@@ -9,7 +10,6 @@ import 'package:exam/features/auth/register/presentation/screens/register_screen
 import 'package:exam/features/exams/presentation/view/screens/start_exam.dart';
 import 'package:exam/features/profile/presentation/screens/profile_screen.dart';
 import 'package:exam/features/profile/presentation/screens/reset_password_screen.dart';
-
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/reset_password.dart';
 import 'package:exam/features/exams/presentation/view/screens/exams.dart';
 import 'package:exam/features/subjects/presentation/screens/lay_out.dart';
@@ -21,8 +21,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
+
   Bloc.observer = AppBlocObserver();
-  final tokenCubit = getIt<TokenCubit>();
+
+  final TokenCubit tokenCubit = getIt<TokenCubit>();
   await tokenCubit.loadToken();
 
   runApp(
@@ -42,8 +44,8 @@ class Exam extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_, __) => BlocBuilder<TokenCubit, String?>(
-        builder: (context, token) {
+      builder: (_, __) => BlocBuilder<TokenCubit, TokenState>(
+        builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             routes: {
@@ -61,11 +63,18 @@ class Exam extends StatelessWidget {
               Exams.routeName: (context) => const Exams(),
               StartExam.routeName: (context) => const StartExam(),
             },
-            initialRoute: token == null ? Login.routeName : LayOut.routeName,
+            initialRoute: _getInitialRoute(state),
             theme: AppTheme.appThemeData,
           );
         },
       ),
     );
+  }
+
+  String _getInitialRoute(TokenState state) {
+    if (state.rememberMe && state.token != null) {
+      return LayOut.routeName;
+    }
+    return Login.routeName;
   }
 }
