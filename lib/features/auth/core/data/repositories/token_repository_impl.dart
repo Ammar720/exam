@@ -38,4 +38,24 @@ class TokenRepositoryImpl implements TokenRepository {
       return ErrorApiResult("Failed to delete token");
     }
   }
+
+  @override
+  Future<ApiResult<void>> setRememberMe(bool isRememberMe) async {
+    try {
+      await _localDataSource.setRememberMe(isRememberMe);
+      return SuccessApiResult(null);
+    } catch (error) {
+      return ErrorApiResult("Failed to save Remember Me preference");
+    }
+  }
+
+  @override
+  Future<ApiResult<bool>> getRememberMe() async {
+    try {
+      final isRememberMe = await _localDataSource.getRememberMe();
+      return SuccessApiResult(isRememberMe);
+    } catch (error) {
+      return ErrorApiResult("Failed to retrieve Remember Me preference");
+    }
+  }
 }
