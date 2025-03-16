@@ -6,6 +6,7 @@ class AppTheme {
   static const Color liteBlue = Color(0xff5679BD);
   static const Color white = Color(0xffF9F9F9);
   static const Color black = Color(0xff0F0F0F);
+  static const Color lightBlack = Color(0xffCFCFCF);
   static const Color gray = Color(0xff535353);
   static const Color lightGray = Color(0xff5F5F5F);
   static const Color error = Color(0xffCC1010);
@@ -50,6 +51,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
+        elevation: WidgetStatePropertyAll(0),
         backgroundColor: const WidgetStatePropertyAll(blue),
         foregroundColor: const WidgetStatePropertyAll(white),
         minimumSize: WidgetStatePropertyAll(Size(343.w, 48.h)),
@@ -69,7 +71,6 @@ class AppTheme {
         ),
       ),
     ),
-    
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: textTheme.bodyLarge,
       hintStyle: textTheme.bodyLarge,
@@ -77,7 +78,6 @@ class AppTheme {
       focusedBorder: const OutlineInputBorder(),
       floatingLabelBehavior: FloatingLabelBehavior.always,
       contentPadding: EdgeInsets.all(16.sp),
-    
     ),
   );
 }

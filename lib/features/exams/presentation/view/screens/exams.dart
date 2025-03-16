@@ -23,11 +23,11 @@ class _ExamsState extends State<Exams> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => examCubit..getExams("670039c3728c92b7fdf43506"),
+        create: (context) => examCubit..getExams("670037f6728c92b7fdf434fc"),
         child: Scaffold(
           appBar: AppBar(
             title: Text("Languages"),
-            centerTitle: false,
+            titleSpacing: 0,
             leading: const Icon(Icons.arrow_back_ios_new),
           ),
           body: BlocBuilder<ExamCubit, ExamStates>(builder: (context, state) {

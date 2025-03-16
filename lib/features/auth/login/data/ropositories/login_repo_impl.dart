@@ -4,7 +4,6 @@ import 'package:exam/features/auth/login/data/datasources/remote_datasource.dart
 import 'package:exam/features/auth/login/domain/ropositories/login_repo.dart';
 import 'package:injectable/injectable.dart';
 
-
 // @override
 // Future<ApiResult<void>> enterEmail(String email) async {
 //   try {
@@ -23,12 +22,11 @@ class LoginRepoImpl implements LoginRepo {
 
   @override
   Future<ApiResult<void>> login(String email, String password) async {
-  try {
-    await _remoteDatasource.login(email, password);
-    return SuccessApiResult(null);
-  } catch (error) {
-    return ErrorApiResult(ErrorHandler.getErrorMessage(error));
-  }
-
+    try {
+      await _remoteDatasource.login(email, password);
+      return SuccessApiResult(null);
+    } catch (error) {
+      return ErrorApiResult(ErrorHandler.getErrorMessage(error));
+    }
   }
 }

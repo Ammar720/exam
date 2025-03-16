@@ -12,6 +12,8 @@ import 'package:exam/features/profile/presentation/screens/profile_screen.dart';
 import 'package:exam/features/profile/presentation/screens/reset_password_screen.dart';
 import 'package:exam/features/auth/forgetPassword/presentation/view/screens/reset_password.dart';
 import 'package:exam/features/exams/presentation/view/screens/exams.dart';
+import 'package:exam/features/questions/presentation/view/screens/exam_score.dart';
+import 'package:exam/features/questions/presentation/view/screens/questions.dart';
 import 'package:exam/features/subjects/presentation/screens/lay_out.dart';
 import 'package:exam/features/subjects/presentation/screens/survay.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +64,10 @@ class Exam extends StatelessWidget {
               Survay.routeName: (context) => const Survay(),
               Exams.routeName: (context) => const Exams(),
               StartExam.routeName: (context) => const StartExam(),
+              Questions.routeName: (context) => const Questions(),
+              ExamScore.routeName: (context) => const ExamScore(),
             },
+
             initialRoute: _getInitialRoute(state),
             theme: AppTheme.appThemeData,
           );

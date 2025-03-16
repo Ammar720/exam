@@ -5,7 +5,7 @@ class ErrorHandler {
     if (error is DioException) {
       return _handleDioException(error);
     } else if (error is Exception) {
-      return error.toString().replaceFirst("Exception: ", ""); 
+      return error.toString().replaceFirst("Exception: ", "");
     } else {
       return "Something went wrong. Please try again.";
     }

@@ -9,4 +9,3 @@ class ErrorApiResult<T> extends ApiResult<T> {
   String exception;
   ErrorApiResult(this.exception);
 }
-
