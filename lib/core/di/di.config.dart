@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -19,10 +20,14 @@ import 'package:exam/features/auth/core/domain/repositories.dart/token_repositor
     as _i119;
 import 'package:exam/features/auth/core/domain/use_cases/delete_token.dart'
     as _i132;
+import 'package:exam/features/auth/core/domain/use_cases/get_remember_me.dart'
+    as _i346;
 import 'package:exam/features/auth/core/domain/use_cases/get_token.dart'
     as _i827;
 import 'package:exam/features/auth/core/domain/use_cases/save_token.dart'
     as _i289;
+import 'package:exam/features/auth/core/domain/use_cases/set_remember.dart'
+    as _i628;
 import 'package:exam/features/auth/core/presentation/cubit/token_cubit.dart'
     as _i667;
 import 'package:exam/features/auth/forgetPassword/data/datasources/remote/api_remote_data_source.dart'
@@ -156,10 +161,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1067.LoginUsecase(gh<_i690.LoginRepo>()));
     gh.factory<_i132.DeleteToken>(
         () => _i132.DeleteToken(gh<_i119.TokenRepository>()));
+    gh.factory<_i346.GetRememberMe>(
+        () => _i346.GetRememberMe(gh<_i119.TokenRepository>()));
     gh.factory<_i827.GetToken>(
         () => _i827.GetToken(gh<_i119.TokenRepository>()));
     gh.factory<_i289.SaveToken>(
         () => _i289.SaveToken(gh<_i119.TokenRepository>()));
+    gh.factory<_i628.SetRememberMe>(
+        () => _i628.SetRememberMe(gh<_i119.TokenRepository>()));
     gh.factory<_i326.ForgetPasswordCubit>(() => _i326.ForgetPasswordCubit(
           gh<_i203.EnterEmail>(),
           gh<_i126.VerfiyResetCode>(),
@@ -169,13 +178,15 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i370.ExamCubit(gh<_i413.ExamUseCase>()));
     gh.factory<_i473.RegisterUseCase>(
         () => _i473.RegisterUseCase(gh<_i676.RegisterRepo>()));
+    gh.singleton<_i623.LoginCubit>(
+        () => _i623.LoginCubit(gh<_i1067.LoginUsecase>()));
     gh.factory<_i667.TokenCubit>(() => _i667.TokenCubit(
           gh<_i827.GetToken>(),
           gh<_i289.SaveToken>(),
           gh<_i132.DeleteToken>(),
+          gh<_i628.SetRememberMe>(),
+          gh<_i346.GetRememberMe>(),
         ));
-    gh.singleton<_i623.LoginCubit>(
-        () => _i623.LoginCubit(gh<_i1067.LoginUsecase>()));
     gh.factory<_i499.RegisterViewModel>(
         () => _i499.RegisterViewModel(gh<_i473.RegisterUseCase>()));
     return this;
